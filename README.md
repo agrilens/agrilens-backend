@@ -7,7 +7,6 @@ npm i nodemon
 npm i dotenv     
      
 npm install -g firebase-tools     
-firebase init     
      
      
 firebase init functions          
