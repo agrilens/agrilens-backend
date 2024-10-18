@@ -1,0 +1,584 @@
+[debug] [2024-10-18T20:32:36.253Z] ----------------------------------------------------------------------
+[debug] [2024-10-18T20:32:36.254Z] Command:       /usr/local/share/nvm/versions/node/v18.20.4/bin/node /home/codespace/nvm/current/bin/firebase emulators:start
+[debug] [2024-10-18T20:32:36.255Z] CLI Version:   13.22.1
+[debug] [2024-10-18T20:32:36.255Z] Platform:      linux
+[debug] [2024-10-18T20:32:36.255Z] Node Version:  v18.20.4
+[debug] [2024-10-18T20:32:36.255Z] Time:          Fri Oct 18 2024 20:32:36 GMT+0000 (Coordinated Universal Time)
+[debug] [2024-10-18T20:32:36.256Z] Env Overrides: GITHUB_API_URL, GITHUB_API_URL
+[debug] [2024-10-18T20:32:36.256Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-18T20:32:36.352Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-18T20:32:36.353Z] > authorizing via signed-in user (bednie.msudenver@gmail.com)
+[info] i  emulators: Starting emulators: functions, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, extensions"}}
+[debug] [2024-10-18T20:32:36.356Z] Checked if tokens are valid: true, expires at: 1729285727196
+[debug] [2024-10-18T20:32:36.357Z] Checked if tokens are valid: true, expires at: 1729285727196
+[debug] [2024-10-18T20:32:36.358Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agrilens-web [none]
+[debug] [2024-10-18T20:32:36.682Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agrilens-web 200
+[debug] [2024-10-18T20:32:36.682Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agrilens-web {"projectId":"agrilens-web","projectNumber":"687340693602","displayName":"AgriLens","name":"projects/agrilens-web","resources":{"hostingSite":"agrilens-web"},"state":"ACTIVE","etag":"1_1733acc4-862b-49bb-b8fa-b652460466bf"}
+[debug] [2024-10-18T20:32:36.688Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-10-18T20:32:36.688Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-10-18T20:32:36.693Z] [hub] writing locator at /tmp/hub-agrilens-web.json
+[debug] [2024-10-18T20:32:36.699Z] [Extensions] Started Extensions emulator, this is a noop.
+[debug] [2024-10-18T20:32:36.700Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-10-18T20:32:36.700Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-10-18T20:32:36.701Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-10-18T20:32:36.701Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2024-10-18T20:32:36.704Z] defaultcredentials: writing to file /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json
+[debug] [2024-10-18T20:32:36.705Z] Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json"}}
+[debug] [2024-10-18T20:32:36.707Z] Checked if tokens are valid: true, expires at: 1729285727196
+[debug] [2024-10-18T20:32:36.707Z] Checked if tokens are valid: true, expires at: 1729285727196
+[debug] [2024-10-18T20:32:36.707Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agrilens-web/adminSdkConfig [none]
+[debug] [2024-10-18T20:32:37.028Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agrilens-web/adminSdkConfig 200
+[debug] [2024-10-18T20:32:37.028Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agrilens-web/adminSdkConfig {"projectId":"agrilens-web","storageBucket":"agrilens-web.appspot.com"}
+[debug] [2024-10-18T20:32:37.058Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-10-18T20:32:37.058Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-10-18T20:32:37.058Z] Starting Emulator UI with command {"binary":"node","args":["/home/codespace/.cache/firebase/emulators/ui-v1.14.0/server/server.mjs"],"optionalArgs":[],"joinArgs":false,"shell":false,"port":4000} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/codespace/.cache/firebase/emulators/ui-v1.14.0/server/server.mjs\"],\"optionalArgs\":[],\"joinArgs\":false,\"shell\":false,\"port\":4000}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2024-10-18T20:32:37.177Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2024-10-18T20:32:37.178Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[debug] [2024-10-18T20:32:37.268Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/workspaces/agrilens-backend/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/workspaces/agrilens-backend/functions\" for Cloud Functions..."}}
+[debug] [2024-10-18T20:32:37.278Z] Validating nodejs source
+[debug] [2024-10-18T20:32:37.830Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2024-10-18T20:32:37.831Z] Building nodejs source
+[debug] [2024-10-18T20:32:37.831Z] Failed to find version of module node: reached end of search path /workspaces/agrilens-backend/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:32:37.834Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-10-18T20:32:37.837Z] Found firebase-functions binary at '/workspaces/agrilens-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8289
+
+[info] Service account keys: [
+  'type',
+  'project_id',
+  'private_key_id',
+  'private_key',
+  'client_email',
+  'client_id',
+  'auth_uri',
+  'token_uri',
+  'auth_provider_x509_cert_url',
+  'client_x509_cert_url',
+  'universe_domain'
+]
+
+[info] Project ID: agrilens-web
+
+[debug] [2024-10-18T20:32:38.404Z] Got response from /__/functions.yaml {"endpoints":{"app":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"app"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2024-10-18T20:32:38.430Z] defaultcredentials: writing to file /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json
+[debug] [2024-10-18T20:32:38.431Z] Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: app. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: app."}}
+[info] ✔  functions[us-central1-app]: http function initialized (http://127.0.0.1:5001/agrilens-web/us-central1/app). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/agrilens-web/us-central1/app)."}}
+[debug] [2024-10-18T20:32:38.438Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED ::1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator   │ Host:Port      │ View in Emulator UI              │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Functions  │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions  │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/extensions │
+└────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2024-10-18T20:32:49.491Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:32:49.491Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:32:49.492Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:32:49.491Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:32:49.492Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:32:49.494Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:32:49.494Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:32:49.500Z] [worker-pool] addWorker(us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-app)"}}
+[debug] [2024-10-18T20:32:49.501Z] [worker-pool] Adding worker with key us-central1-app, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-app, total=1"}}
+[debug] [2024-10-18T20:32:50.414Z] [runtime-status] [37573] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2024-10-18T20:32:50.415Z] [runtime-status] [37573] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:32:50.415Z] [runtime-status] [37573] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2024-10-18T20:32:50.416Z] [runtime-status] [37573] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:32:50.567Z] [runtime-status] [37573] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Checked functions.config() {\"config\":{}}"}}
+[debug] [2024-10-18T20:32:50.567Z] [runtime-status] [37573] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}}"}}
+[debug] [2024-10-18T20:32:50.567Z] [runtime-status] [37573] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:32:50.570Z] [runtime-status] [37573] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2024-10-18T20:32:50.571Z] [runtime-status] [37573] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:32:50.572Z] [runtime-status] [37573] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] >  Service account keys: [ {"user":"Service account keys: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Service account keys: ["}}
+[info] >    'type', {"user":"  'type',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'type',"}}
+[info] >    'project_id', {"user":"  'project_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'project_id',"}}
+[info] >    'private_key_id', {"user":"  'private_key_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'private_key_id',"}}
+[info] >    'private_key', {"user":"  'private_key',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'private_key',"}}
+[info] >    'client_email', {"user":"  'client_email',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_email',"}}
+[info] >    'client_id', {"user":"  'client_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_id',"}}
+[info] >    'auth_uri', {"user":"  'auth_uri',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'auth_uri',"}}
+[info] >    'token_uri', {"user":"  'token_uri',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'token_uri',"}}
+[info] >    'auth_provider_x509_cert_url', {"user":"  'auth_provider_x509_cert_url',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'auth_provider_x509_cert_url',"}}
+[info] >    'client_x509_cert_url', {"user":"  'client_x509_cert_url',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_x509_cert_url',"}}
+[info] >    'universe_domain' {"user":"  'universe_domain'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'universe_domain'"}}
+[info] >  ] {"user":"]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m ]"}}
+[info] >  Project ID: agrilens-web {"user":"Project ID: agrilens-web","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Project ID: agrilens-web"}}
+[debug] [2024-10-18T20:32:50.688Z] [runtime-status] [37573] initializeApp(DEFAULT) {"credential":{"implicit":false,"projectId":"agrilens-web","privateKey":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEZpEpLgHwAY+8\nVRGudyLpNeNDCoNf9Jitey638ef3QSwZbiEE5eKgm/0vH99kYknj4sBF3mOVod47\nc2qfpBTerObI5pSUdAlORwZ0oWXjrCJFyA/2CgTnOgs1oZHqL9H4oI7ErrZLchut\nHqxaHdOn3ES0YBv0YSHGKbh79dRNbE3y47Uq39nYtQy1zhozw37nmyzUd2KIJNc+\nBbu2mly3onvg3V7LzI7yZbSGeeUg6F4E76LKT1Fh7hPtD+mfD9XcW2jUskx7Ccds\nvHwug65w9sEVnbujyY/K6fFI2dE0rp1RJobqyPTRWp8BK9Ta5W3u+zGk5hvivja/\nKeNnSVSzAgMBAAECggEAH9KqtKxyvevS2WZDTiyZqIYFw+ghL1wXnQx3nnCA8IxL\n0/cHPJ7vIK0F0ivs63wNkvI7y1Zkdmta8fEalrFkfEwxvN23t3Ixy9AwWJeKReCv\nUPVAuNIYx0qdZFxAo1yKPint2Cqi+QiNOXjd3mA02l8TdtKX1PokGdLKxLMpaj3Y\nUZmzqgmeK/BC9+EszXtrLAWgL3CGJ/B1k0FHlZqy0T+gbM9OkybI5Z9qpMiAUz6q\n1RMA4VPmIKPDWli19RPThdc53ssvCXTFuK9qgYKhO3g1jTYFn5ZSyzS4JTkV+lW1\nYs9kV484Kc2yOWwwbVuwfbaSCv5DX6I38dhjP1rTOQKBgQD1Ywbooqypr8i81Tzc\n4IJqdBHSLEKd/N3Jse+DEjqA7Vapg2psv3eqCVZcdIqTQY2QyAQRlmnbLVKk99Yo\n4G3z+B6/+ONaW0AFhlxSKeJBRIKF+lz2P07dxq7wLo7n5M788vuXWOdul14ZCmtl\nL7cRTbLOZMRTA2DGJIgWdRP4XwKBgQDM5Se4KtLrwLgSo+J9gh1DnpkLE2uTCipy\n4P9rUcAcTcTf4QLoWIcJfwChwzg4DykW9zRfp0HU4z8HVxn4ulitRbwTcD0Gma5w\nZ50m7x+KSxvBR6tzpxDs8nmOLrr7vokcSw4+c5aOU37r3UiyXJAfUHjfzTP6JrWp\nA7vVrejULQKBgQCTEvdhF59FVQaLp4MDH80K4OaNgdmrt5N3AB7+AD7wZ1A56Xow\nE9I1J8OLRo6IFBI1ZKyLngt0QoX2OlUxytIcF+rWROZ/kZGdvho3ZMMnO1i/1H9D\nWE58vki7zCv68TjegwQogjC0KCVN/ODBlQe0Z010RxEkcDHgkKTAUQvXIQKBgFVF\nALSqTcEDIRfQ0E8/OQKNHE/5swksb+IDNQjqqrKcwtQRBm6/eONA0XiAkAL0fDss\ngcVVDBaWxAJAA3T5yDHEFbNZQGxgxLHOzR4I4e1huJlFRFsLKgYSGvhLBlICR3lY\n2wKug/eTU/zAyKJB11DQ4pzw/zKZrXw7K46Po5e5AoGAfyYzr8irLahcKMZXu6+P\ngKg1OPEUg1yrBKv5BGKmGBMHKbdtLhFnYot6ZfMnlv3bmJMQ2h72Tr8l4Mu2fPVa\nAPX+rnvo4YwuDHP/gsvhwYue10ib3KeYaKHEioNsJ3ghpFO6LhbBUNV91aqd7spV\nA4DbJ8PxdklhrD7deejA4EY=\n-----END PRIVATE KEY-----\n","clientEmail":"github-action-867998929@agrilens-web.iam.gserviceaccount.com","httpClient":{"retry":{"maxRetries":4,"statusCodes":[503],"ioErrorCodes":["ECONNRESET","ETIMEDOUT"],"backOffFactor":0.5,"maxDelayInMillis":60000}}}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] initializeApp(DEFAULT) {\"credential\":{\"implicit\":false,\"projectId\":\"agrilens-web\",\"privateKey\":\"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEZpEpLgHwAY+8\\nVRGudyLpNeNDCoNf9Jitey638ef3QSwZbiEE5eKgm/0vH99kYknj4sBF3mOVod47\\nc2qfpBTerObI5pSUdAlORwZ0oWXjrCJFyA/2CgTnOgs1oZHqL9H4oI7ErrZLchut\\nHqxaHdOn3ES0YBv0YSHGKbh79dRNbE3y47Uq39nYtQy1zhozw37nmyzUd2KIJNc+\\nBbu2mly3onvg3V7LzI7yZbSGeeUg6F4E76LKT1Fh7hPtD+mfD9XcW2jUskx7Ccds\\nvHwug65w9sEVnbujyY/K6fFI2dE0rp1RJobqyPTRWp8BK9Ta5W3u+zGk5hvivja/\\nKeNnSVSzAgMBAAECggEAH9KqtKxyvevS2WZDTiyZqIYFw+ghL1wXnQx3nnCA8IxL\\n0/cHPJ7vIK0F0ivs63wNkvI7y1Zkdmta8fEalrFkfEwxvN23t3Ixy9AwWJeKReCv\\nUPVAuNIYx0qdZFxAo1yKPint2Cqi+QiNOXjd3mA02l8TdtKX1PokGdLKxLMpaj3Y\\nUZmzqgmeK/BC9+EszXtrLAWgL3CGJ/B1k0FHlZqy0T+gbM9OkybI5Z9qpMiAUz6q\\n1RMA4VPmIKPDWli19RPThdc53ssvCXTFuK9qgYKhO3g1jTYFn5ZSyzS4JTkV+lW1\\nYs9kV484Kc2yOWwwbVuwfbaSCv5DX6I38dhjP1rTOQKBgQD1Ywbooqypr8i81Tzc\\n4IJqdBHSLEKd/N3Jse+DEjqA7Vapg2psv3eqCVZcdIqTQY2QyAQRlmnbLVKk99Yo\\n4G3z+B6/+ONaW0AFhlxSKeJBRIKF+lz2P07dxq7wLo7n5M788vuXWOdul14ZCmtl\\nL7cRTbLOZMRTA2DGJIgWdRP4XwKBgQDM5Se4KtLrwLgSo+J9gh1DnpkLE2uTCipy\\n4P9rUcAcTcTf4QLoWIcJfwChwzg4DykW9zRfp0HU4z8HVxn4ulitRbwTcD0Gma5w\\nZ50m7x+KSxvBR6tzpxDs8nmOLrr7vokcSw4+c5aOU37r3UiyXJAfUHjfzTP6JrWp\\nA7vVrejULQKBgQCTEvdhF59FVQaLp4MDH80K4OaNgdmrt5N3AB7+AD7wZ1A56Xow\\nE9I1J8OLRo6IFBI1ZKyLngt0QoX2OlUxytIcF+rWROZ/kZGdvho3ZMMnO1i/1H9D\\nWE58vki7zCv68TjegwQogjC0KCVN/ODBlQe0Z010RxEkcDHgkKTAUQvXIQKBgFVF\\nALSqTcEDIRfQ0E8/OQKNHE/5swksb+IDNQjqqrKcwtQRBm6/eONA0XiAkAL0fDss\\ngcVVDBaWxAJAA3T5yDHEFbNZQGxgxLHOzR4I4e1huJlFRFsLKgYSGvhLBlICR3lY\\n2wKug/eTU/zAyKJB11DQ4pzw/zKZrXw7K46Po5e5AoGAfyYzr8irLahcKMZXu6+P\\ngKg1OPEUg1yrBKv5BGKmGBMHKbdtLhFnYot6ZfMnlv3bmJMQ2h72Tr8l4Mu2fPVa\\nAPX+rnvo4YwuDHP/gsvhwYue10ib3KeYaKHEioNsJ3ghpFO6LhbBUNV91aqd7spV\\nA4DbJ8PxdklhrD7deejA4EY=\\n-----END PRIVATE KEY-----\\n\",\"clientEmail\":\"github-action-867998929@agrilens-web.iam.gserviceaccount.com\",\"httpClient\":{\"retry\":{\"maxRetries\":4,\"statusCodes\":[503],\"ioErrorCodes\":[\"ECONNRESET\",\"ETIMEDOUT\"],\"backOffFactor\":0.5,\"maxDelayInMillis\":60000}}}}"}}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"The Cloud Firestore emulator is not running, so calls to Firestore will affect production."}}
+[debug] [2024-10-18T20:32:50.742Z] [runtime-status] [37573] Functions runtime initialized. {"cwd":"/workspaces/agrilens-backend/functions","node_version":"18.20.4"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Functions runtime initialized. {\"cwd\":\"/workspaces/agrilens-backend/functions\",\"node_version\":\"18.20.4\"}"}}
+[debug] [2024-10-18T20:32:50.745Z] [runtime-status] [37573] Listening to port: /tmp/fire_emu_dc72adf0d4d082bc.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [37573] Listening to port: /tmp/fire_emu_dc72adf0d4d082bc.sock"}}
+[debug] [2024-10-18T20:32:50.825Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE"}}
+[debug] [2024-10-18T20:32:50.826Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:32:50.827Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:32:50.841Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 14.676162ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 14.676162ms"}}
+[debug] [2024-10-18T20:32:50.842Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE"}}
+[debug] [2024-10-18T20:32:50.842Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:32:50.842Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:32:50.842Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] >  Error: Unexpected end of form {"user":"Error: Unexpected end of form","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Error: Unexpected end of form"}}
+[info] >      at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17) {"user":"    at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)"}}
+[info] >      at callFinal (node:internal/streams/writable:698:12) {"user":"    at callFinal (node:internal/streams/writable:698:12)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at callFinal (node:internal/streams/writable:698:12)"}}
+[info] >      at prefinish (node:internal/streams/writable:710:7) {"user":"    at prefinish (node:internal/streams/writable:710:7)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at prefinish (node:internal/streams/writable:710:7)"}}
+[info] >      at finishMaybe (node:internal/streams/writable:720:5) {"user":"    at finishMaybe (node:internal/streams/writable:720:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at finishMaybe (node:internal/streams/writable:720:5)"}}
+[info] >      at Writable.end (node:internal/streams/writable:634:5) {"user":"    at Writable.end (node:internal/streams/writable:634:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Writable.end (node:internal/streams/writable:634:5)"}}
+[info] >      at onend (node:internal/streams/readable:748:10) {"user":"    at onend (node:internal/streams/readable:748:10)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at onend (node:internal/streams/readable:748:10)"}}
+[info] >      at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {"user":"    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)"}}
+[debug] [2024-10-18T20:33:18.804Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:33:18.804Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:33:18.804Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:33:18.804Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:33:18.805Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:33:18.807Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:33:18.807Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:33:18.807Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:33:18.808Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:33:18.814Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 7.664685ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 7.664685ms"}}
+[debug] [2024-10-18T20:33:18.816Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE"}}
+[debug] [2024-10-18T20:33:18.816Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:33:18.816Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:33:18.816Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:33:51.415Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:33:51.415Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:33:51.415Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:33:51.415Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:33:51.415Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:33:51.417Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:33:51.417Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:33:51.418Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:33:51.418Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:33:51.423Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 5.728003ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 5.728003ms"}}
+[debug] [2024-10-18T20:33:51.425Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: IDLE"}}
+[debug] [2024-10-18T20:33:51.425Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:33:51.425Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:33:51.426Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] >  Error: Unexpected end of form {"user":"Error: Unexpected end of form","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Error: Unexpected end of form"}}
+[info] >      at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17) {"user":"    at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)"}}
+[info] >      at callFinal (node:internal/streams/writable:698:12) {"user":"    at callFinal (node:internal/streams/writable:698:12)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at callFinal (node:internal/streams/writable:698:12)"}}
+[info] >      at prefinish (node:internal/streams/writable:710:7) {"user":"    at prefinish (node:internal/streams/writable:710:7)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at prefinish (node:internal/streams/writable:710:7)"}}
+[info] >      at finishMaybe (node:internal/streams/writable:720:5) {"user":"    at finishMaybe (node:internal/streams/writable:720:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at finishMaybe (node:internal/streams/writable:720:5)"}}
+[info] >      at Writable.end (node:internal/streams/writable:634:5) {"user":"    at Writable.end (node:internal/streams/writable:634:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Writable.end (node:internal/streams/writable:634:5)"}}
+[info] >      at onend (node:internal/streams/readable:748:10) {"user":"    at onend (node:internal/streams/readable:748:10)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at onend (node:internal/streams/readable:748:10)"}}
+[info] >      at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {"user":"    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)"}}
+[debug] [2024-10-18T20:35:16.251Z] File /workspaces/agrilens-backend/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/agrilens-backend/functions/index.js changed, reloading triggers"}}
+[debug] [2024-10-18T20:35:17.251Z] Validating nodejs source
+[debug] [2024-10-18T20:35:17.859Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2024-10-18T20:35:17.859Z] Building nodejs source
+[debug] [2024-10-18T20:35:17.860Z] Failed to find version of module node: reached end of search path /workspaces/agrilens-backend/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:35:17.861Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-10-18T20:35:17.862Z] Found firebase-functions binary at '/workspaces/agrilens-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8881
+
+[info] Service account keys: [
+  'type',
+  'project_id',
+  'private_key_id',
+  'private_key',
+  'client_email',
+  'client_id',
+  'auth_uri',
+  'token_uri',
+  'auth_provider_x509_cert_url',
+  'client_x509_cert_url',
+  'universe_domain'
+]
+
+[info] Project ID: agrilens-web
+
+[debug] [2024-10-18T20:35:18.333Z] Got response from /__/functions.yaml {"endpoints":{"app":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"app"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2024-10-18T20:35:18.349Z] defaultcredentials: writing to file /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json
+[debug] [2024-10-18T20:35:18.350Z] Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: app. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: app."}}
+[debug] [2024-10-18T20:35:18.351Z] [worker-pool] Shutting down IDLE worker (us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-app)"}}
+[debug] [2024-10-18T20:35:18.351Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: FINISHING"}}
+[debug] [2024-10-18T20:35:18.360Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: exited"}}
+[debug] [2024-10-18T20:35:18.360Z] [worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-341b5b0b-78e0-4945-b5f2-2de1e2b5a8bc]: FINISHED"}}
+[debug] [2024-10-18T20:35:22.304Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:35:22.304Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:35:22.304Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:35:22.304Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:35:22.304Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:35:22.305Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:35:22.306Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:35:22.306Z] [worker-pool] Cleaned up workers for us-central1-app: 1 --> 0 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Cleaned up workers for us-central1-app: 1 --> 0"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:35:22.310Z] [worker-pool] addWorker(us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-app)"}}
+[debug] [2024-10-18T20:35:22.310Z] [worker-pool] Adding worker with key us-central1-app, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-app, total=1"}}
+[debug] [2024-10-18T20:35:23.262Z] [runtime-status] [38812] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2024-10-18T20:35:23.264Z] [runtime-status] [38812] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:35:23.264Z] [runtime-status] [38812] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2024-10-18T20:35:23.265Z] [runtime-status] [38812] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:35:23.412Z] [runtime-status] [38812] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Checked functions.config() {\"config\":{}}"}}
+[debug] [2024-10-18T20:35:23.412Z] [runtime-status] [38812] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}}"}}
+[debug] [2024-10-18T20:35:23.413Z] [runtime-status] [38812] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:35:23.415Z] [runtime-status] [38812] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2024-10-18T20:35:23.417Z] [runtime-status] [38812] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:35:23.417Z] [runtime-status] [38812] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] >  Service account keys: [ {"user":"Service account keys: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Service account keys: ["}}
+[info] >    'type', {"user":"  'type',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'type',"}}
+[info] >    'project_id', {"user":"  'project_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'project_id',"}}
+[info] >    'private_key_id', {"user":"  'private_key_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'private_key_id',"}}
+[info] >    'private_key', {"user":"  'private_key',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'private_key',"}}
+[info] >    'client_email', {"user":"  'client_email',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_email',"}}
+[info] >    'client_id', {"user":"  'client_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_id',"}}
+[info] >    'auth_uri', {"user":"  'auth_uri',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'auth_uri',"}}
+[info] >    'token_uri', {"user":"  'token_uri',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'token_uri',"}}
+[info] >    'auth_provider_x509_cert_url', {"user":"  'auth_provider_x509_cert_url',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'auth_provider_x509_cert_url',"}}
+[info] >    'client_x509_cert_url', {"user":"  'client_x509_cert_url',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_x509_cert_url',"}}
+[info] >    'universe_domain' {"user":"  'universe_domain'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'universe_domain'"}}
+[info] >  ] {"user":"]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m ]"}}
+[info] >  Project ID: agrilens-web {"user":"Project ID: agrilens-web","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Project ID: agrilens-web"}}
+[debug] [2024-10-18T20:35:23.503Z] [runtime-status] [38812] initializeApp(DEFAULT) {"credential":{"implicit":false,"projectId":"agrilens-web","privateKey":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEZpEpLgHwAY+8\nVRGudyLpNeNDCoNf9Jitey638ef3QSwZbiEE5eKgm/0vH99kYknj4sBF3mOVod47\nc2qfpBTerObI5pSUdAlORwZ0oWXjrCJFyA/2CgTnOgs1oZHqL9H4oI7ErrZLchut\nHqxaHdOn3ES0YBv0YSHGKbh79dRNbE3y47Uq39nYtQy1zhozw37nmyzUd2KIJNc+\nBbu2mly3onvg3V7LzI7yZbSGeeUg6F4E76LKT1Fh7hPtD+mfD9XcW2jUskx7Ccds\nvHwug65w9sEVnbujyY/K6fFI2dE0rp1RJobqyPTRWp8BK9Ta5W3u+zGk5hvivja/\nKeNnSVSzAgMBAAECggEAH9KqtKxyvevS2WZDTiyZqIYFw+ghL1wXnQx3nnCA8IxL\n0/cHPJ7vIK0F0ivs63wNkvI7y1Zkdmta8fEalrFkfEwxvN23t3Ixy9AwWJeKReCv\nUPVAuNIYx0qdZFxAo1yKPint2Cqi+QiNOXjd3mA02l8TdtKX1PokGdLKxLMpaj3Y\nUZmzqgmeK/BC9+EszXtrLAWgL3CGJ/B1k0FHlZqy0T+gbM9OkybI5Z9qpMiAUz6q\n1RMA4VPmIKPDWli19RPThdc53ssvCXTFuK9qgYKhO3g1jTYFn5ZSyzS4JTkV+lW1\nYs9kV484Kc2yOWwwbVuwfbaSCv5DX6I38dhjP1rTOQKBgQD1Ywbooqypr8i81Tzc\n4IJqdBHSLEKd/N3Jse+DEjqA7Vapg2psv3eqCVZcdIqTQY2QyAQRlmnbLVKk99Yo\n4G3z+B6/+ONaW0AFhlxSKeJBRIKF+lz2P07dxq7wLo7n5M788vuXWOdul14ZCmtl\nL7cRTbLOZMRTA2DGJIgWdRP4XwKBgQDM5Se4KtLrwLgSo+J9gh1DnpkLE2uTCipy\n4P9rUcAcTcTf4QLoWIcJfwChwzg4DykW9zRfp0HU4z8HVxn4ulitRbwTcD0Gma5w\nZ50m7x+KSxvBR6tzpxDs8nmOLrr7vokcSw4+c5aOU37r3UiyXJAfUHjfzTP6JrWp\nA7vVrejULQKBgQCTEvdhF59FVQaLp4MDH80K4OaNgdmrt5N3AB7+AD7wZ1A56Xow\nE9I1J8OLRo6IFBI1ZKyLngt0QoX2OlUxytIcF+rWROZ/kZGdvho3ZMMnO1i/1H9D\nWE58vki7zCv68TjegwQogjC0KCVN/ODBlQe0Z010RxEkcDHgkKTAUQvXIQKBgFVF\nALSqTcEDIRfQ0E8/OQKNHE/5swksb+IDNQjqqrKcwtQRBm6/eONA0XiAkAL0fDss\ngcVVDBaWxAJAA3T5yDHEFbNZQGxgxLHOzR4I4e1huJlFRFsLKgYSGvhLBlICR3lY\n2wKug/eTU/zAyKJB11DQ4pzw/zKZrXw7K46Po5e5AoGAfyYzr8irLahcKMZXu6+P\ngKg1OPEUg1yrBKv5BGKmGBMHKbdtLhFnYot6ZfMnlv3bmJMQ2h72Tr8l4Mu2fPVa\nAPX+rnvo4YwuDHP/gsvhwYue10ib3KeYaKHEioNsJ3ghpFO6LhbBUNV91aqd7spV\nA4DbJ8PxdklhrD7deejA4EY=\n-----END PRIVATE KEY-----\n","clientEmail":"github-action-867998929@agrilens-web.iam.gserviceaccount.com","httpClient":{"retry":{"maxRetries":4,"statusCodes":[503],"ioErrorCodes":["ECONNRESET","ETIMEDOUT"],"backOffFactor":0.5,"maxDelayInMillis":60000}}}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] initializeApp(DEFAULT) {\"credential\":{\"implicit\":false,\"projectId\":\"agrilens-web\",\"privateKey\":\"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEZpEpLgHwAY+8\\nVRGudyLpNeNDCoNf9Jitey638ef3QSwZbiEE5eKgm/0vH99kYknj4sBF3mOVod47\\nc2qfpBTerObI5pSUdAlORwZ0oWXjrCJFyA/2CgTnOgs1oZHqL9H4oI7ErrZLchut\\nHqxaHdOn3ES0YBv0YSHGKbh79dRNbE3y47Uq39nYtQy1zhozw37nmyzUd2KIJNc+\\nBbu2mly3onvg3V7LzI7yZbSGeeUg6F4E76LKT1Fh7hPtD+mfD9XcW2jUskx7Ccds\\nvHwug65w9sEVnbujyY/K6fFI2dE0rp1RJobqyPTRWp8BK9Ta5W3u+zGk5hvivja/\\nKeNnSVSzAgMBAAECggEAH9KqtKxyvevS2WZDTiyZqIYFw+ghL1wXnQx3nnCA8IxL\\n0/cHPJ7vIK0F0ivs63wNkvI7y1Zkdmta8fEalrFkfEwxvN23t3Ixy9AwWJeKReCv\\nUPVAuNIYx0qdZFxAo1yKPint2Cqi+QiNOXjd3mA02l8TdtKX1PokGdLKxLMpaj3Y\\nUZmzqgmeK/BC9+EszXtrLAWgL3CGJ/B1k0FHlZqy0T+gbM9OkybI5Z9qpMiAUz6q\\n1RMA4VPmIKPDWli19RPThdc53ssvCXTFuK9qgYKhO3g1jTYFn5ZSyzS4JTkV+lW1\\nYs9kV484Kc2yOWwwbVuwfbaSCv5DX6I38dhjP1rTOQKBgQD1Ywbooqypr8i81Tzc\\n4IJqdBHSLEKd/N3Jse+DEjqA7Vapg2psv3eqCVZcdIqTQY2QyAQRlmnbLVKk99Yo\\n4G3z+B6/+ONaW0AFhlxSKeJBRIKF+lz2P07dxq7wLo7n5M788vuXWOdul14ZCmtl\\nL7cRTbLOZMRTA2DGJIgWdRP4XwKBgQDM5Se4KtLrwLgSo+J9gh1DnpkLE2uTCipy\\n4P9rUcAcTcTf4QLoWIcJfwChwzg4DykW9zRfp0HU4z8HVxn4ulitRbwTcD0Gma5w\\nZ50m7x+KSxvBR6tzpxDs8nmOLrr7vokcSw4+c5aOU37r3UiyXJAfUHjfzTP6JrWp\\nA7vVrejULQKBgQCTEvdhF59FVQaLp4MDH80K4OaNgdmrt5N3AB7+AD7wZ1A56Xow\\nE9I1J8OLRo6IFBI1ZKyLngt0QoX2OlUxytIcF+rWROZ/kZGdvho3ZMMnO1i/1H9D\\nWE58vki7zCv68TjegwQogjC0KCVN/ODBlQe0Z010RxEkcDHgkKTAUQvXIQKBgFVF\\nALSqTcEDIRfQ0E8/OQKNHE/5swksb+IDNQjqqrKcwtQRBm6/eONA0XiAkAL0fDss\\ngcVVDBaWxAJAA3T5yDHEFbNZQGxgxLHOzR4I4e1huJlFRFsLKgYSGvhLBlICR3lY\\n2wKug/eTU/zAyKJB11DQ4pzw/zKZrXw7K46Po5e5AoGAfyYzr8irLahcKMZXu6+P\\ngKg1OPEUg1yrBKv5BGKmGBMHKbdtLhFnYot6ZfMnlv3bmJMQ2h72Tr8l4Mu2fPVa\\nAPX+rnvo4YwuDHP/gsvhwYue10ib3KeYaKHEioNsJ3ghpFO6LhbBUNV91aqd7spV\\nA4DbJ8PxdklhrD7deejA4EY=\\n-----END PRIVATE KEY-----\\n\",\"clientEmail\":\"github-action-867998929@agrilens-web.iam.gserviceaccount.com\",\"httpClient\":{\"retry\":{\"maxRetries\":4,\"statusCodes\":[503],\"ioErrorCodes\":[\"ECONNRESET\",\"ETIMEDOUT\"],\"backOffFactor\":0.5,\"maxDelayInMillis\":60000}}}}"}}
+[debug] [2024-10-18T20:35:23.560Z] [runtime-status] [38812] Functions runtime initialized. {"cwd":"/workspaces/agrilens-backend/functions","node_version":"18.20.4"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Functions runtime initialized. {\"cwd\":\"/workspaces/agrilens-backend/functions\",\"node_version\":\"18.20.4\"}"}}
+[debug] [2024-10-18T20:35:23.561Z] [runtime-status] [38812] Listening to port: /tmp/fire_emu_f1a42a8d16929dfe.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [38812] Listening to port: /tmp/fire_emu_f1a42a8d16929dfe.sock"}}
+[debug] [2024-10-18T20:35:23.630Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE"}}
+[debug] [2024-10-18T20:35:23.631Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:35:23.631Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:35:23.645Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 13.697006ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 13.697006ms"}}
+[debug] [2024-10-18T20:35:23.645Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE"}}
+[debug] [2024-10-18T20:35:23.645Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:35:23.646Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:35:23.646Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] >  Error: Unexpected end of form {"user":"Error: Unexpected end of form","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Error: Unexpected end of form"}}
+[info] >      at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17) {"user":"    at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)"}}
+[info] >      at callFinal (node:internal/streams/writable:698:12) {"user":"    at callFinal (node:internal/streams/writable:698:12)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at callFinal (node:internal/streams/writable:698:12)"}}
+[info] >      at prefinish (node:internal/streams/writable:710:7) {"user":"    at prefinish (node:internal/streams/writable:710:7)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at prefinish (node:internal/streams/writable:710:7)"}}
+[info] >      at finishMaybe (node:internal/streams/writable:720:5) {"user":"    at finishMaybe (node:internal/streams/writable:720:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at finishMaybe (node:internal/streams/writable:720:5)"}}
+[info] >      at Writable.end (node:internal/streams/writable:634:5) {"user":"    at Writable.end (node:internal/streams/writable:634:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Writable.end (node:internal/streams/writable:634:5)"}}
+[info] >      at onend (node:internal/streams/readable:748:10) {"user":"    at onend (node:internal/streams/readable:748:10)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at onend (node:internal/streams/readable:748:10)"}}
+[info] >      at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {"user":"    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)"}}
+[debug] [2024-10-18T20:36:04.479Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:04.479Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:36:04.479Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:04.479Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:36:04.479Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:36:04.481Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:36:04.481Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:36:04.481Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:36:04.482Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:36:04.488Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 6.375258ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 6.375258ms"}}
+[debug] [2024-10-18T20:36:04.489Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE"}}
+[debug] [2024-10-18T20:36:04.489Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:36:04.489Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:36:04.489Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:36:19.988Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:19.988Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:36:19.989Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:19.988Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:36:19.989Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:36:19.990Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:36:19.990Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:36:19.990Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:36:19.991Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:36:19.996Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 5.328137ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 5.328137ms"}}
+[debug] [2024-10-18T20:36:19.996Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE"}}
+[debug] [2024-10-18T20:36:19.997Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:36:19.997Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:36:19.997Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] >  Error: Unexpected end of form {"user":"Error: Unexpected end of form","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Error: Unexpected end of form"}}
+[info] >      at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17) {"user":"    at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)"}}
+[info] >      at callFinal (node:internal/streams/writable:698:12) {"user":"    at callFinal (node:internal/streams/writable:698:12)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at callFinal (node:internal/streams/writable:698:12)"}}
+[info] >      at prefinish (node:internal/streams/writable:710:7) {"user":"    at prefinish (node:internal/streams/writable:710:7)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at prefinish (node:internal/streams/writable:710:7)"}}
+[info] >      at finishMaybe (node:internal/streams/writable:720:5) {"user":"    at finishMaybe (node:internal/streams/writable:720:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at finishMaybe (node:internal/streams/writable:720:5)"}}
+[info] >      at Writable.end (node:internal/streams/writable:634:5) {"user":"    at Writable.end (node:internal/streams/writable:634:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Writable.end (node:internal/streams/writable:634:5)"}}
+[info] >      at onend (node:internal/streams/readable:748:10) {"user":"    at onend (node:internal/streams/readable:748:10)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at onend (node:internal/streams/readable:748:10)"}}
+[info] >      at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {"user":"    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)"}}
+[debug] [2024-10-18T20:36:43.931Z] File /workspaces/agrilens-backend/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/agrilens-backend/functions/index.js changed, reloading triggers"}}
+[debug] [2024-10-18T20:36:44.344Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:44.344Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:36:44.344Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:44.344Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:36:44.344Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:36:44.345Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:36:44.346Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:36:44.346Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:36:44.346Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:36:44.350Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 4.153885ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 4.153885ms"}}
+[debug] [2024-10-18T20:36:44.351Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: IDLE"}}
+[debug] [2024-10-18T20:36:44.351Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:36:44.351Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:36:44.351Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] >  Error: Unexpected end of form {"user":"Error: Unexpected end of form","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Error: Unexpected end of form"}}
+[info] >      at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17) {"user":"    at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)"}}
+[info] >      at callFinal (node:internal/streams/writable:698:12) {"user":"    at callFinal (node:internal/streams/writable:698:12)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at callFinal (node:internal/streams/writable:698:12)"}}
+[info] >      at prefinish (node:internal/streams/writable:710:7) {"user":"    at prefinish (node:internal/streams/writable:710:7)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at prefinish (node:internal/streams/writable:710:7)"}}
+[info] >      at finishMaybe (node:internal/streams/writable:720:5) {"user":"    at finishMaybe (node:internal/streams/writable:720:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at finishMaybe (node:internal/streams/writable:720:5)"}}
+[info] >      at Writable.end (node:internal/streams/writable:634:5) {"user":"    at Writable.end (node:internal/streams/writable:634:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Writable.end (node:internal/streams/writable:634:5)"}}
+[info] >      at onend (node:internal/streams/readable:748:10) {"user":"    at onend (node:internal/streams/readable:748:10)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at onend (node:internal/streams/readable:748:10)"}}
+[info] >      at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {"user":"    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)"}}
+[debug] [2024-10-18T20:36:44.932Z] Validating nodejs source
+[debug] [2024-10-18T20:36:45.538Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2024-10-18T20:36:45.538Z] Building nodejs source
+[debug] [2024-10-18T20:36:45.539Z] Failed to find version of module node: reached end of search path /workspaces/agrilens-backend/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:36:45.540Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-10-18T20:36:45.541Z] Found firebase-functions binary at '/workspaces/agrilens-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8154
+
+[info] Service account keys: [
+  'type',
+  'project_id',
+  'private_key_id',
+  'private_key',
+  'client_email',
+  'client_id',
+  'auth_uri',
+  'token_uri',
+  'auth_provider_x509_cert_url',
+  'client_x509_cert_url',
+  'universe_domain'
+]
+
+[info] Project ID: agrilens-web
+
+[debug] [2024-10-18T20:36:46.011Z] Got response from /__/functions.yaml {"endpoints":{"app":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"app"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2024-10-18T20:36:46.026Z] defaultcredentials: writing to file /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json
+[debug] [2024-10-18T20:36:46.026Z] Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: app. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: app."}}
+[debug] [2024-10-18T20:36:46.027Z] [worker-pool] Shutting down IDLE worker (us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-app)"}}
+[debug] [2024-10-18T20:36:46.027Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: FINISHING"}}
+[debug] [2024-10-18T20:36:46.063Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: exited"}}
+[debug] [2024-10-18T20:36:46.064Z] [worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-f442ebae-2af5-498a-a452-fa94dae9e816]: FINISHED"}}
+[debug] [2024-10-18T20:36:46.431Z] [work-queue] {"queuedWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:46.431Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2024-10-18T20:36:46.431Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agrilens-web/us-central1/app/images/analyze-2024-10-18T20:36:46.431Z"],"workRunningCount":1}
+[debug] [2024-10-18T20:36:46.431Z] Accepted request POST /agrilens-web/us-central1/app/images/analyze --> us-central1-app
+[debug] [2024-10-18T20:36:46.435Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2024-10-18T20:36:46.435Z] [functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agrilens-web/us-central1/app/images/analyze, mapping to path=/images/analyze"}}
+[debug] [2024-10-18T20:36:46.435Z] [worker-pool] Cleaned up workers for us-central1-app: 1 --> 0 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Cleaned up workers for us-central1-app: 1 --> 0"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:36:46.440Z] [worker-pool] addWorker(us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-app)"}}
+[debug] [2024-10-18T20:36:46.441Z] [worker-pool] Adding worker with key us-central1-app, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-app, total=1"}}
+[debug] [2024-10-18T20:36:47.506Z] [runtime-status] [39736] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2024-10-18T20:36:47.507Z] [runtime-status] [39736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:36:47.508Z] [runtime-status] [39736] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2024-10-18T20:36:47.509Z] [runtime-status] [39736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:36:47.689Z] [runtime-status] [39736] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Checked functions.config() {\"config\":{}}"}}
+[debug] [2024-10-18T20:36:47.689Z] [runtime-status] [39736] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}}"}}
+[debug] [2024-10-18T20:36:47.690Z] [runtime-status] [39736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:36:47.692Z] [runtime-status] [39736] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2024-10-18T20:36:47.693Z] [runtime-status] [39736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.0.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.0.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2024-10-18T20:36:47.693Z] [runtime-status] [39736] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.11.1","resolution":"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.11.1\",\"resolution\":\"/workspaces/agrilens-backend/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] >  Service account keys: [ {"user":"Service account keys: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Service account keys: ["}}
+[info] >    'type', {"user":"  'type',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'type',"}}
+[info] >    'project_id', {"user":"  'project_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'project_id',"}}
+[info] >    'private_key_id', {"user":"  'private_key_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'private_key_id',"}}
+[info] >    'private_key', {"user":"  'private_key',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'private_key',"}}
+[info] >    'client_email', {"user":"  'client_email',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_email',"}}
+[info] >    'client_id', {"user":"  'client_id',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_id',"}}
+[info] >    'auth_uri', {"user":"  'auth_uri',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'auth_uri',"}}
+[info] >    'token_uri', {"user":"  'token_uri',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'token_uri',"}}
+[info] >    'auth_provider_x509_cert_url', {"user":"  'auth_provider_x509_cert_url',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'auth_provider_x509_cert_url',"}}
+[info] >    'client_x509_cert_url', {"user":"  'client_x509_cert_url',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'client_x509_cert_url',"}}
+[info] >    'universe_domain' {"user":"  'universe_domain'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m   'universe_domain'"}}
+[info] >  ] {"user":"]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m ]"}}
+[info] >  Project ID: agrilens-web {"user":"Project ID: agrilens-web","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Project ID: agrilens-web"}}
+[debug] [2024-10-18T20:36:47.782Z] [runtime-status] [39736] initializeApp(DEFAULT) {"credential":{"implicit":false,"projectId":"agrilens-web","privateKey":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEZpEpLgHwAY+8\nVRGudyLpNeNDCoNf9Jitey638ef3QSwZbiEE5eKgm/0vH99kYknj4sBF3mOVod47\nc2qfpBTerObI5pSUdAlORwZ0oWXjrCJFyA/2CgTnOgs1oZHqL9H4oI7ErrZLchut\nHqxaHdOn3ES0YBv0YSHGKbh79dRNbE3y47Uq39nYtQy1zhozw37nmyzUd2KIJNc+\nBbu2mly3onvg3V7LzI7yZbSGeeUg6F4E76LKT1Fh7hPtD+mfD9XcW2jUskx7Ccds\nvHwug65w9sEVnbujyY/K6fFI2dE0rp1RJobqyPTRWp8BK9Ta5W3u+zGk5hvivja/\nKeNnSVSzAgMBAAECggEAH9KqtKxyvevS2WZDTiyZqIYFw+ghL1wXnQx3nnCA8IxL\n0/cHPJ7vIK0F0ivs63wNkvI7y1Zkdmta8fEalrFkfEwxvN23t3Ixy9AwWJeKReCv\nUPVAuNIYx0qdZFxAo1yKPint2Cqi+QiNOXjd3mA02l8TdtKX1PokGdLKxLMpaj3Y\nUZmzqgmeK/BC9+EszXtrLAWgL3CGJ/B1k0FHlZqy0T+gbM9OkybI5Z9qpMiAUz6q\n1RMA4VPmIKPDWli19RPThdc53ssvCXTFuK9qgYKhO3g1jTYFn5ZSyzS4JTkV+lW1\nYs9kV484Kc2yOWwwbVuwfbaSCv5DX6I38dhjP1rTOQKBgQD1Ywbooqypr8i81Tzc\n4IJqdBHSLEKd/N3Jse+DEjqA7Vapg2psv3eqCVZcdIqTQY2QyAQRlmnbLVKk99Yo\n4G3z+B6/+ONaW0AFhlxSKeJBRIKF+lz2P07dxq7wLo7n5M788vuXWOdul14ZCmtl\nL7cRTbLOZMRTA2DGJIgWdRP4XwKBgQDM5Se4KtLrwLgSo+J9gh1DnpkLE2uTCipy\n4P9rUcAcTcTf4QLoWIcJfwChwzg4DykW9zRfp0HU4z8HVxn4ulitRbwTcD0Gma5w\nZ50m7x+KSxvBR6tzpxDs8nmOLrr7vokcSw4+c5aOU37r3UiyXJAfUHjfzTP6JrWp\nA7vVrejULQKBgQCTEvdhF59FVQaLp4MDH80K4OaNgdmrt5N3AB7+AD7wZ1A56Xow\nE9I1J8OLRo6IFBI1ZKyLngt0QoX2OlUxytIcF+rWROZ/kZGdvho3ZMMnO1i/1H9D\nWE58vki7zCv68TjegwQogjC0KCVN/ODBlQe0Z010RxEkcDHgkKTAUQvXIQKBgFVF\nALSqTcEDIRfQ0E8/OQKNHE/5swksb+IDNQjqqrKcwtQRBm6/eONA0XiAkAL0fDss\ngcVVDBaWxAJAA3T5yDHEFbNZQGxgxLHOzR4I4e1huJlFRFsLKgYSGvhLBlICR3lY\n2wKug/eTU/zAyKJB11DQ4pzw/zKZrXw7K46Po5e5AoGAfyYzr8irLahcKMZXu6+P\ngKg1OPEUg1yrBKv5BGKmGBMHKbdtLhFnYot6ZfMnlv3bmJMQ2h72Tr8l4Mu2fPVa\nAPX+rnvo4YwuDHP/gsvhwYue10ib3KeYaKHEioNsJ3ghpFO6LhbBUNV91aqd7spV\nA4DbJ8PxdklhrD7deejA4EY=\n-----END PRIVATE KEY-----\n","clientEmail":"github-action-867998929@agrilens-web.iam.gserviceaccount.com","httpClient":{"retry":{"maxRetries":4,"statusCodes":[503],"ioErrorCodes":["ECONNRESET","ETIMEDOUT"],"backOffFactor":0.5,"maxDelayInMillis":60000}}}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] initializeApp(DEFAULT) {\"credential\":{\"implicit\":false,\"projectId\":\"agrilens-web\",\"privateKey\":\"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEZpEpLgHwAY+8\\nVRGudyLpNeNDCoNf9Jitey638ef3QSwZbiEE5eKgm/0vH99kYknj4sBF3mOVod47\\nc2qfpBTerObI5pSUdAlORwZ0oWXjrCJFyA/2CgTnOgs1oZHqL9H4oI7ErrZLchut\\nHqxaHdOn3ES0YBv0YSHGKbh79dRNbE3y47Uq39nYtQy1zhozw37nmyzUd2KIJNc+\\nBbu2mly3onvg3V7LzI7yZbSGeeUg6F4E76LKT1Fh7hPtD+mfD9XcW2jUskx7Ccds\\nvHwug65w9sEVnbujyY/K6fFI2dE0rp1RJobqyPTRWp8BK9Ta5W3u+zGk5hvivja/\\nKeNnSVSzAgMBAAECggEAH9KqtKxyvevS2WZDTiyZqIYFw+ghL1wXnQx3nnCA8IxL\\n0/cHPJ7vIK0F0ivs63wNkvI7y1Zkdmta8fEalrFkfEwxvN23t3Ixy9AwWJeKReCv\\nUPVAuNIYx0qdZFxAo1yKPint2Cqi+QiNOXjd3mA02l8TdtKX1PokGdLKxLMpaj3Y\\nUZmzqgmeK/BC9+EszXtrLAWgL3CGJ/B1k0FHlZqy0T+gbM9OkybI5Z9qpMiAUz6q\\n1RMA4VPmIKPDWli19RPThdc53ssvCXTFuK9qgYKhO3g1jTYFn5ZSyzS4JTkV+lW1\\nYs9kV484Kc2yOWwwbVuwfbaSCv5DX6I38dhjP1rTOQKBgQD1Ywbooqypr8i81Tzc\\n4IJqdBHSLEKd/N3Jse+DEjqA7Vapg2psv3eqCVZcdIqTQY2QyAQRlmnbLVKk99Yo\\n4G3z+B6/+ONaW0AFhlxSKeJBRIKF+lz2P07dxq7wLo7n5M788vuXWOdul14ZCmtl\\nL7cRTbLOZMRTA2DGJIgWdRP4XwKBgQDM5Se4KtLrwLgSo+J9gh1DnpkLE2uTCipy\\n4P9rUcAcTcTf4QLoWIcJfwChwzg4DykW9zRfp0HU4z8HVxn4ulitRbwTcD0Gma5w\\nZ50m7x+KSxvBR6tzpxDs8nmOLrr7vokcSw4+c5aOU37r3UiyXJAfUHjfzTP6JrWp\\nA7vVrejULQKBgQCTEvdhF59FVQaLp4MDH80K4OaNgdmrt5N3AB7+AD7wZ1A56Xow\\nE9I1J8OLRo6IFBI1ZKyLngt0QoX2OlUxytIcF+rWROZ/kZGdvho3ZMMnO1i/1H9D\\nWE58vki7zCv68TjegwQogjC0KCVN/ODBlQe0Z010RxEkcDHgkKTAUQvXIQKBgFVF\\nALSqTcEDIRfQ0E8/OQKNHE/5swksb+IDNQjqqrKcwtQRBm6/eONA0XiAkAL0fDss\\ngcVVDBaWxAJAA3T5yDHEFbNZQGxgxLHOzR4I4e1huJlFRFsLKgYSGvhLBlICR3lY\\n2wKug/eTU/zAyKJB11DQ4pzw/zKZrXw7K46Po5e5AoGAfyYzr8irLahcKMZXu6+P\\ngKg1OPEUg1yrBKv5BGKmGBMHKbdtLhFnYot6ZfMnlv3bmJMQ2h72Tr8l4Mu2fPVa\\nAPX+rnvo4YwuDHP/gsvhwYue10ib3KeYaKHEioNsJ3ghpFO6LhbBUNV91aqd7spV\\nA4DbJ8PxdklhrD7deejA4EY=\\n-----END PRIVATE KEY-----\\n\",\"clientEmail\":\"github-action-867998929@agrilens-web.iam.gserviceaccount.com\",\"httpClient\":{\"retry\":{\"maxRetries\":4,\"statusCodes\":[503],\"ioErrorCodes\":[\"ECONNRESET\",\"ETIMEDOUT\"],\"backOffFactor\":0.5,\"maxDelayInMillis\":60000}}}}"}}
+[debug] [2024-10-18T20:36:47.849Z] [runtime-status] [39736] Functions runtime initialized. {"cwd":"/workspaces/agrilens-backend/functions","node_version":"18.20.4"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Functions runtime initialized. {\"cwd\":\"/workspaces/agrilens-backend/functions\",\"node_version\":\"18.20.4\"}"}}
+[debug] [2024-10-18T20:36:47.851Z] [runtime-status] [39736] Listening to port: /tmp/fire_emu_74d14ab6d855a2ea.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[runtime-status] [39736] Listening to port: /tmp/fire_emu_74d14ab6d855a2ea.sock"}}
+[debug] [2024-10-18T20:36:47.863Z] [worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: IDLE"}}
+[debug] [2024-10-18T20:36:47.864Z] [worker-pool] submitRequest(triggerId=us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-app)"}}
+[info] i  functions: Beginning execution of "us-central1-app" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Beginning execution of \"us-central1-app\""}}
+[debug] [2024-10-18T20:36:47.864Z] [worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: BUSY"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[info] >  No auth token, proceeding without authentication {"user":"No auth token, proceeding without authentication","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m No auth token, proceeding without authentication"}}
+[debug] [2024-10-18T20:36:47.884Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-app" in 20.470318ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finished \"us-central1-app\" in 20.470318ms"}}
+[debug] [2024-10-18T20:36:47.885Z] [worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: IDLE"}}
+[debug] [2024-10-18T20:36:47.885Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2024-10-18T20:36:47.885Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2024-10-18T20:36:47.885Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] >  Error: Unexpected end of form {"user":"Error: Unexpected end of form","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m Error: Unexpected end of form"}}
+[info] >      at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17) {"user":"    at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Multipart._final (/workspaces/agrilens-backend/node_modules/busboy/lib/types/multipart.js:588:17)"}}
+[info] >      at callFinal (node:internal/streams/writable:698:12) {"user":"    at callFinal (node:internal/streams/writable:698:12)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at callFinal (node:internal/streams/writable:698:12)"}}
+[info] >      at prefinish (node:internal/streams/writable:710:7) {"user":"    at prefinish (node:internal/streams/writable:710:7)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at prefinish (node:internal/streams/writable:710:7)"}}
+[info] >      at finishMaybe (node:internal/streams/writable:720:5) {"user":"    at finishMaybe (node:internal/streams/writable:720:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at finishMaybe (node:internal/streams/writable:720:5)"}}
+[info] >      at Writable.end (node:internal/streams/writable:634:5) {"user":"    at Writable.end (node:internal/streams/writable:634:5)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at Writable.end (node:internal/streams/writable:634:5)"}}
+[info] >      at onend (node:internal/streams/readable:748:10) {"user":"    at onend (node:internal/streams/readable:748:10)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at onend (node:internal/streams/readable:748:10)"}}
+[info] >      at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {"user":"    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"\u001b[90m> \u001b[39m     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)"}}
+[debug] [2024-10-18T20:37:07.612Z] File /workspaces/agrilens-backend/functions/middleware/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/agrilens-backend/functions/middleware/index.js changed, reloading triggers"}}
+[debug] [2024-10-18T20:37:08.613Z] Validating nodejs source
+[debug] [2024-10-18T20:37:09.200Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2024-10-18T20:37:09.200Z] Building nodejs source
+[debug] [2024-10-18T20:37:09.201Z] Failed to find version of module node: reached end of search path /workspaces/agrilens-backend/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2024-10-18T20:37:09.202Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-10-18T20:37:09.203Z] Found firebase-functions binary at '/workspaces/agrilens-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8025
+
+[info] Service account keys: [
+  'type',
+  'project_id',
+  'private_key_id',
+  'private_key',
+  'client_email',
+  'client_id',
+  'auth_uri',
+  'token_uri',
+  'auth_provider_x509_cert_url',
+  'client_x509_cert_url',
+  'universe_domain'
+]
+
+[info] Project ID: agrilens-web
+
+[debug] [2024-10-18T20:37:09.761Z] Got response from /__/functions.yaml {"endpoints":{"app":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"app"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2024-10-18T20:37:09.777Z] defaultcredentials: writing to file /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json
+[debug] [2024-10-18T20:37:09.778Z] Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/codespace/.config/firebase/bednie_msudenver_gmail.com_application_default_credentials.json"}}
+[info] ✔  functions: Loaded functions definitions from source: app. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: app."}}
+[debug] [2024-10-18T20:37:09.778Z] [worker-pool] Shutting down IDLE worker (us-central1-app) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-app)"}}
+[debug] [2024-10-18T20:37:09.779Z] [worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: FINISHING"}}
+[debug] [2024-10-18T20:37:09.788Z] [worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: exited"}}
+[debug] [2024-10-18T20:37:09.788Z] [worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-app"},"extension":{},"message":"[worker-us-central1-app-25a934f0-38ec-4717-97e1-2e66cf505a2f]: FINISHED"}}
