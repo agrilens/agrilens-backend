@@ -204,12 +204,28 @@ app.post("/analyze", (req, res) => {
       const apiResponse = await axios.post('https://api.hyperbolic.xyz/v1/chat/completions', {
         model: 'Qwen/Qwen2-VL-72B-Instruct',
         messages: [
-          { role: 'system', content: 'Analyze the given plant image for health issues.' },
-          { 
-            role: 'user', 
+          {
+            role: 'system',
+            content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following JSON format:
+            {
+              "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
+              "health_score": <number between 0 and 100>,
+              "pest_identification": "<description of any pests found or 'None detected'>",
+              "disease_identification": "<description of any diseases found or 'None detected'>",
+              "weed_presence": "<description of any weeds found or 'None detected'>",
+              "recommendations": [
+                "<recommendation 1>",
+                "<recommendation 2>",
+                ...
+              ]
+            }
+            Ensure all fields are filled out based on your analysis of the image.`
+          },
+          {
+            role: 'user',
             content: [
-              { type: "text", text: 'Analyze this plant image:'},
-              { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64Image}` } }
+              { type: "text", text: 'Analyze this plant image for health issues:'},
+              { type: "image_url", image_url: { url: `data:image/jpeg;base64,${image}` } }
             ]
           }
         ],
