@@ -3,10 +3,29 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "npm init -y      npm i express      npm i firebase-admin      npm i nodemon      npm i dotenv",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "busboy": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrilens/agrilens-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agrilens/agrilens-backend/issues"
+  },
+  "homepage": "https://github.com/agrilens/agrilens-backend#readme"
 }

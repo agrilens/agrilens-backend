@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "agrilens-web"
-  }
+    "default": "agrilens-web",
+    "analyze": "agrilens-web"
+  },
+  "targets": {},
+  "etags": {}
 }

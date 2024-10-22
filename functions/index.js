@@ -1,11 +1,19 @@
 /* eslint-disable */
 
 const functions = require("firebase-functions");
-// const admin = require("firebase-admin");
+const admin = require("firebase-admin");
 const express = require("express");
 const cors = require("cors");
+const busboy = require("busboy");
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+const axios = require("axios");
+const multer = require("multer");
+require("dotenv").config();
+const upload = multer({ memory: true });
 
-const middleware = require("./middleware");
+// const middleware = require("./middleware");
 const userRouter = require("./routes/users");
 const imageRouter = require("./routes/images");
 const plantApi = require("./routes/api/plants");
@@ -20,26 +28,147 @@ app.get("/", (req, res) => {
   res.status(200).send({ data: "AgriLens firebase functions" });
 });
 
-app.get("/filedownload", (req, res) => {
-  res.download("index.js"); // Let's the user download the given file
+// app.get("/filedownload", (req, res) => {
+//   res.download("index.js"); // Let's the user download the given file
+// });
+
+// app.get("/htmlrender", (req, res) => {
+//   res.render("index"); // Returns view/index.html file
+// });
+app.use("/images", imageRouter);
+
+
+app.post("/analyze", (req, res) => {
+  console.log("analyze called");
+  if (req.method !== "POST") {
+    // Since the endpoint is `app.post`, this block will never be excuted
+    return res.status(405).end();
+  }
+  // console.log("analyze req.headers: ", req.headers);
+
+  const bb = busboy({ headers: req.headers });
+  let fileBuffer = null;
+  let requestedInsights = [];
+
+  bb.on("file", (name, file, info) => {
+    console.log(`Processing file`);
+    const chunks = [];
+    file.on("data", (data) => {
+      chunks.push(data);
+    });
+    file.on("end", () => {
+      fileBuffer = Buffer.concat(chunks);
+      console.log(`File [${name}] Finished. Size: ${fileBuffer.length} bytes`);
+    });
+  });
+
+  bb.on("field", (name, val) => {
+    if (name !== "image") {
+      requestedInsights.push(val);
+      console.log(`Processed non-image field ${name}: ${val}.`);
+    }
+  });
+
+  bb.on("finish", async () => {
+    if (!fileBuffer) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    console.log("requestedInsights: ", requestedInsights);
+
+    try {
+      console.log("Sending request to Hyperbolic API...");
+      const base64Image = fileBuffer.toString("base64");
+
+      const apiResponse = await axios.post(
+        "https://api.hyperbolic.xyz/v1/chat/completions",
+        {
+          model: "Qwen/Qwen2-VL-72B-Instruct",
+          messages: [
+            {
+              role: "system",
+              content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following object notation:
+            {
+              "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
+              "health_score": <number between 0 and 100>,
+              "pest_identification": "<description of any pests found or 'None detected'>",
+              "disease_identification": "<description of any diseases found or 'None detected'>",
+              "weed_presence": "<description of any weeds found or 'None detected'>",
+              "recommendations": [
+                "<recommendation 1>",
+                "<recommendation 2>",
+                ...
+              ]
+            }
+            Ensure all fields are filled out based on your analysis of the image.`,
+            },
+            {
+              role: "user",
+              content: [
+                {
+                  type: "text",
+                  text: "Analyze this plant image for health issues:",
+                },
+                {
+                  type: "image_url",
+                  image_url: { url: `data:image/jpeg;base64,${base64Image}` },
+                },
+              ],
+            },
+          ],
+          max_tokens: 2048,
+          temperature: 0.7,
+          top_p: 0.9,
+          stream: false,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`,
+          },
+        }
+      );
+
+      console.log("Received response from Hyperbolic API");
+      const analysisResult = apiResponse.data.choices[0].message.content;
+      console.log("analysisResult: ", analysisResult);
+      // console.log('Logging to Firestore...');
+      // const db = admin.firestore();
+      // const docRef = await db.collection('analyses').add({
+      //   result: analysisResult,
+      //   timestamp: new Date() //admin.firestore.FieldValue.serverTimestamp()
+      // });
+      // console.log('Successfully logged to Firestore with ID:', docRef.id);
+
+      res.status(200).json({
+        message: "Analysis completed and logged",
+        // id: docRef.id,
+        result: analysisResult,
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({
+        error: "An error occurred during analysis",
+        details: error.message,
+      });
+    }
+  });
+
+  bb.end(req.rawBody);
 });
 
-app.get("/htmlrender", (req, res) => {
-  res.render("index"); // Returns view/index.html file
-});
-
-app.use(middleware.decodeToken);
+// app.use(middleware.decodeToken);
 
 app.get("/auth", (req, res) => {
   res.status(200).send({ data: "Authorized: AgriLens firebase functions" });
 });
 
-app.get("/auth/download", (req, res) => {
-  res.download("index"); // Let's the user download the given file
-});
-app.get("/auth/htmlrender", (req, res) => {
-  res.render("index"); // Returns view/index.html file
-});
+// app.get("/auth/download", (req, res) => {
+//   res.download("index"); // Let's the user download the given file
+// });
+// app.get("/auth/htmlrender", (req, res) => {
+//   res.render("index"); // Returns view/index.html file
+// });
 
 app.get("/api/plants", (req, res) => {
   console.log("req user: ", req.user);
@@ -80,8 +209,11 @@ app.get("/api/plants", (req, res) => {
 });
 
 app.use("/users", userRouter);
-app.use("/images", imageRouter);
 app.use("/api/plants", plantApi);
+
+app.get("/*", (req, res) => {
+  res.status(200).send({ data: "Endpoint is not valid" });
+});
 
 exports.app = functions.https.onRequest(app);
 

@@ -14,6 +14,7 @@ module.exports = {
     "object-curly-spacing": ["off"],
     "require-jsdoc": "off",
     "quotes": ["error", "double", { allowTemplateLiterals: true }],
+    "new-cap": ["error", { "capIsNew": false }],
   },
   overrides: [
     {
