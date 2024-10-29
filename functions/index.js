@@ -1,7 +1,9 @@
 /* eslint-disable */
 
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+// const admin = require("firebase-admin");
+const { admin, db } = require("./config/firebase-config");
+
 const express = require("express");
 const cors = require("cors");
 const busboy = require("busboy");
@@ -13,30 +15,26 @@ const multer = require("multer");
 require("dotenv").config();
 const upload = multer({ memory: true });
 
-// const middleware = require("./middleware");
-const userRouter = require("./routes/users");
-const imageRouter = require("./routes/images");
-const plantApi = require("./routes/api/plants");
-
 const app = express();
 app.use(cors());
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const middleware = require("./middleware");
+const userRouter = require("./routes/users");
+const imageRouter = require("./routes/images");
+const plantApi = require("./routes/api/plants");
+const usersApi = require("./routes/api/db");
+
 app.get("/", (req, res) => {
   res.status(200).send({ data: "AgriLens firebase functions" });
 });
 
-// app.get("/filedownload", (req, res) => {
-//   res.download("index.js"); // Let's the user download the given file
-// });
-
-// app.get("/htmlrender", (req, res) => {
-//   res.render("index"); // Returns view/index.html file
-// });
+app.use("/users", userRouter);
 app.use("/images", imageRouter);
-
+app.use("/api/users", usersApi);
+app.use("/api/plants", plantApi);
 
 app.post("/analyze", (req, res) => {
   console.log("analyze called");
@@ -157,19 +155,6 @@ app.post("/analyze", (req, res) => {
   bb.end(req.rawBody);
 });
 
-// app.use(middleware.decodeToken);
-
-app.get("/auth", (req, res) => {
-  res.status(200).send({ data: "Authorized: AgriLens firebase functions" });
-});
-
-// app.get("/auth/download", (req, res) => {
-//   res.download("index"); // Let's the user download the given file
-// });
-// app.get("/auth/htmlrender", (req, res) => {
-//   res.render("index"); // Returns view/index.html file
-// });
-
 app.get("/api/plants", (req, res) => {
   console.log("req user: ", req.user);
   return res.json({
@@ -208,8 +193,10 @@ app.get("/api/plants", (req, res) => {
   });
 });
 
-app.use("/users", userRouter);
-app.use("/api/plants", plantApi);
+// app.use(middleware.decodeToken);
+app.get("/auth", (req, res) => {
+  res.status(200).send({ data: "Authorized: AgriLens firebase functions" });
+});
 
 app.get("/*", (req, res) => {
   res.status(200).send({ data: "Endpoint is not valid" });
