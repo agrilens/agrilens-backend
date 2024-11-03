@@ -150,38 +150,56 @@ router.get("/:customerId/scan-history/", async (req, res) => {
 
 // Create a new user:
 router.post("/customer", async (req, res) => {
-  const { firstName, lastName, type, email } = req.body; // Expect these fields in the request body
+  const {
+    firstName,
+    lastName,
+    type,
+    email,
+    city,
+    state,
+    country,
+    userInterest,
+    uid,
+  } = req.body; // Expect these fields in the request body
 
-  if (!firstName || !email) {
+  if (!firstName || !email || !uid) {
     return res.status(400).json({ message: "Enter Required Fields." });
   }
 
   try {
-
     const customersRef = db
       .collection("users")
       .doc("customers")
-      .collection("customer");
+      .collection("customer")
+      .doc(uid);
 
-    const newCustomerRef = await customersRef.add({
+    await customersRef.set({
       createdAt: new Date().toISOString(),
     });
 
-    const accountDetailRef = newCustomerRef.collection("account").doc("detail");
+    const accountDetailRef = customersRef.collection("account").doc("detail");
 
-    await accountDetailRef.set({
-      firstName,
-      lastName,
-      type,
-      email,
-      createdAt: new Date().toISOString(),
-    });
+    await accountDetailRef.set(
+      Object.fromEntries(
+        Object.entries({
+          firstName,
+          lastName,
+          type,
+          email,
+          city,
+          state,
+          country,
+          userInterest,
+          uid,
+          createdAt: new Date().toISOString(),
+        }).filter(([_, value]) => value !== undefined) // Remove keys with undefined values
+      )
+    );
 
     res.status(201).json({
       message: "Customer created successfully!",
-      customerId: newCustomerRef.id, 
+      customerId: uid,
     });
-
   } catch (error) {
     console.error("Error creating customer:", error);
     res
@@ -223,7 +241,7 @@ router.post("/:customerId/chat-history", async (req, res) => {
 
 router.post("/:customerId/scan-history", async (req, res) => {
   const { customerId } = req.params;
-  const { imageUrl, imageData } = req.body; 
+  const { imageUrl, imageData } = req.body;
 
   console.log("message: ", imageUrl);
   console.log("message: ", imageData);
