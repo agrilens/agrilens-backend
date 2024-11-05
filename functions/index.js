@@ -1,91 +1,64 @@
 /* eslint-disable */
 
-const functions = require("firebase-functions");
-// const admin = require("firebase-admin");
-const { admin, db } = require("./config/firebase-config");
-
-const express = require("express");
-const cors = require("cors");
-const busboy = require("busboy");
-const fs = require("fs");
-const path = require("path");
-const os = require("os");
-const axios = require("axios");
-const multer = require("multer");
-require("dotenv").config();
+const functions = require('firebase-functions');
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+const multer = require('multer');
 const upload = multer({ memory: true });
+require('dotenv').config();
 
+// Firebase configuration (if applicable)
+const { admin, db } = require('./config/firebase-config');
+
+// Initialize Express app
 const app = express();
 app.use(cors());
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const middleware = require("./middleware");
-const userRouter = require("./routes/users");
-const imageRouter = require("./routes/images");
-const plantApi = require("./routes/api/plants");
-const usersApi = require("./routes/api/db");
+// Import routers (if any)
+const middleware = require('./middleware');
+const userRouter = require('./routes/users');
+const imageRouter = require('./routes/images');
+const plantApi = require('./routes/api/plants');
+const usersApi = require('./routes/api/db');
 
-app.get("/", (req, res) => {
-  res.status(200).send({ data: "AgriLens firebase functions" });
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).send({ data: 'AgriLens firebase functions' });
 });
 
-app.use("/users", userRouter);
-app.use("/images", imageRouter);
-app.use("/api/users", usersApi);
-app.use("/api/plants", plantApi);
+// Use routers
+app.use('/users', userRouter);
+app.use('/images', imageRouter);
+app.use('/api/users', usersApi);
+app.use('/api/plants', plantApi);
 
-app.post("/analyze", (req, res) => {
-  console.log("analyze called");
-  if (req.method !== "POST") {
-    // Since the endpoint is `app.post`, this block will never be excuted
-    return res.status(405).end();
-  }
-  // console.log("analyze req.headers: ", req.headers);
-
-  const bb = busboy({ headers: req.headers });
-  let fileBuffer = null;
-  let requestedInsights = [];
-
-  bb.on("file", (name, file, info) => {
-    console.log(`Processing file`);
-    const chunks = [];
-    file.on("data", (data) => {
-      chunks.push(data);
-    });
-    file.on("end", () => {
-      fileBuffer = Buffer.concat(chunks);
-      console.log(`File [${name}] Finished. Size: ${fileBuffer.length} bytes`);
-    });
-  });
-
-  bb.on("field", (name, val) => {
-    if (name !== "image") {
-      requestedInsights.push(val);
-      console.log(`Processed non-image field ${name}: ${val}.`);
-    }
-  });
-
-  bb.on("finish", async () => {
-    if (!fileBuffer) {
-      return res.status(400).json({ error: "No file uploaded" });
+// Analyze endpoint
+app.post('/analyze', upload.single('image'), async (req, res) => {
+  console.log('analyze called');
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ error: 'No image uploaded' });
     }
 
-    console.log("requestedInsights: ", requestedInsights);
+    const base64Image = file.buffer.toString('base64');
 
-    try {
-      console.log("Sending request to Hyperbolic API...");
-      const base64Image = fileBuffer.toString("base64");
+    // Prepare requests to both APIs
+    console.log('Sending requests to Hyperbolic and Plant ID APIs...');
 
-      const apiResponse = await axios.post(
-        "https://api.hyperbolic.xyz/v1/chat/completions",
-        {
-          model: "Qwen/Qwen2-VL-72B-Instruct",
-          messages: [
-            {
-              role: "system",
-              content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following object notation:
+    // Hyperbolic API request
+    const hyperbolicRequest = axios.post(
+      'https://api.hyperbolic.xyz/v1/chat/completions',
+      {
+        model: 'Qwen/Qwen2-VL-72B-Instruct',
+        messages: [
+          {
+            role: 'system',
+            content: You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following object notation:
             {
               "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
               "health_score": <number between 0 and 100>,
@@ -98,116 +71,152 @@ app.post("/analyze", (req, res) => {
                 ...
               ]
             }
-            Ensure all fields are filled out based on your analysis of the image.`,
-            },
-            {
-              role: "user",
-              content: [
-                {
-                  type: "text",
-                  text: "Analyze this plant image for health issues:",
-                },
-                {
-                  type: "image_url",
-                  image_url: { url: `data:image/jpeg;base64,${base64Image}` },
-                },
-              ],
-            },
-          ],
-          max_tokens: 2048,
-          temperature: 0.7,
-          top_p: 0.9,
-          stream: false,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`,
+            Ensure all fields are filled out based on your analysis of the image.,
           },
-        }
-      );
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: 'Analyze this plant image for health issues:',
+              },
+              {
+                type: 'image_url',
+                image_url: { url: data:image/jpeg;base64,${base64Image} },
+              },
+            ],
+          },
+        ],
+        max_tokens: 2048,
+        temperature: 0.7,
+        top_p: 0.9,
+        stream: false,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: Bearer ${process.env.HYPERBOLIC_API_KEY},
+        },
+      }
+    );
 
-      console.log("Received response from Hyperbolic API");
-      const analysisResult = apiResponse.data.choices[0].message.content;
-      console.log("analysisResult: ", analysisResult);
-      // console.log('Logging to Firestore...');
-      // const db = admin.firestore();
-      // const docRef = await db.collection('analyses').add({
-      //   result: analysisResult,
-      //   timestamp: new Date() //admin.firestore.FieldValue.serverTimestamp()
-      // });
-      // console.log('Successfully logged to Firestore with ID:', docRef.id);
+    // Prepare Plant ID API URL with query parameters
+    const plantIdUrl = 'https://api.plant.id/v3/identification';
+    const plantIdParams = new URLSearchParams();
+    plantIdParams.append('disease_details', 'description,treatment');
+    plantIdParams.append('plant_details', 'common_names,description');
+    plantIdParams.append('plant_language', 'en');
+    plantIdParams.append('disease_language', 'en');
 
-      res.status(200).json({
-        message: "Analysis completed and logged",
-        // id: docRef.id,
-        result: analysisResult,
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      res.status(500).json({
-        error: "An error occurred during analysis",
-        details: error.message,
-      });
+    // Plant ID API request
+    const plantIdRequest = axios.post(
+      ${plantIdUrl}?${plantIdParams.toString()},
+      {
+        images: [base64Image],
+        health: 'all', // Include both identification and health assessment
+        //  We can include other params here
+      },
+      {
+        headers: {
+          'Api-Key': process.env.PLANT_ID_API_KEY,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    // Execute both requests concurrently
+    const [hyperbolicResponse, plantIdResponse] = await Promise.all([
+      hyperbolicRequest,
+      plantIdRequest,
+    ]);
+
+    console.log('Received responses from both APIs');
+
+    // Extract results
+    const hyperbolicResult = hyperbolicResponse.data.choices[0].message.content;
+    const plantIdResult = plantIdResponse.data;
+
+    // Send combined response to the client
+    res.status(200).json({
+      message: 'Analysis completed',
+      hyperbolicResult: hyperbolicResult,
+      plantIdResult: plantIdResult,
+    });
+  } catch (error) {
+    console.error('Error:', error.response ? error.response.data : error.message);
+    res.status(500).json({
+      error: 'An error occurred during analysis',
+      details: error.response ? error.response.data : error.message,
+    });
+  }
+});
+
+// Endpoint to interact with Plant ID chatbot
+app.post('/plantid/conversation/:access_token', async (req, res) => {
+  try {
+    const accessToken = req.params.access_token;
+    const { question, prompt, temperature, app_name } = req.body;
+
+    if (!question) {
+      return res.status(400).json({ error: 'Question is required' });
     }
-  });
 
-  bb.end(req.rawBody);
-});
+    const data = {
+      question,
+      ...(prompt && { prompt }),
+      ...(temperature && { temperature }),
+      ...(app_name && { app_name }),
+    };
 
-app.get("/api/plants", (req, res) => {
-  console.log("req user: ", req.user);
-  return res.json({
-    plants: [
+    const response = await axios.post(
+      https://plant.id/api/v3/identification/${accessToken}/conversation,
+      data,
       {
-        name: "Beans",
-        growthTime: "60-90 days",
-        idealConditions: {
-          sunlight: "Full sun",
-          temperature: "70-90°F (21-32°C)",
-          soilType: "Well-drained, loamy soil",
+        headers: {
+          'Api-Key': process.env.PLANT_ID_API_KEY,
+          'Content-Type': 'application/json',
         },
-        yield: "1-2 tons per acre",
-      },
+      }
+    );
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Error:', error.response ? error.response.data : error.message);
+    res.status(500).json({
+      error: 'An error occurred while interacting with the chatbot',
+      details: error.response ? error.response.data : error.message,
+    });
+  }
+});
+
+// Endpoint to get chatbot conversation history
+app.get('/plantid/conversation/:access_token', async (req, res) => {
+  try {
+    const accessToken = req.params.access_token;
+
+    const response = await axios.get(
+      https://plant.id/api/v3/identification/${accessToken}/conversation,
       {
-        name: "Wheat",
-        growthTime: "120-150 days",
-        idealConditions: {
-          sunlight: "Full sun",
-          temperature: "60-75°F (15-24°C)",
-          soilType: "Well-drained, fertile soil",
+        headers: {
+          'Api-Key': process.env.PLANT_ID_API_KEY,
         },
-        yield: "3-4 tons per acre",
-      },
-      {
-        name: "Banana",
-        growthTime: "9-12 months",
-        idealConditions: {
-          sunlight: "Full sun",
-          temperature: "75-95°F (24-35°C)",
-          soilType: "Rich, well-drained soil",
-        },
-        yield: "10-20 tons per acre",
-      },
-    ],
-  });
+      }
+    );
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Error:', error.response ? error.response.data : error.message);
+    res.status(500).json({
+      error: 'An error occurred while fetching chatbot conversation',
+      details: error.response ? error.response.data : error.message,
+    });
+  }
 });
 
-// app.use(middleware.decodeToken);
-app.get("/auth", (req, res) => {
-  res.status(200).send({ data: "Authorized: AgriLens firebase functions" });
+// Other routes (if any)
+app.get('/*', (req, res) => {
+  res.status(200).send({ data: 'Endpoint is not valid' });
 });
 
-app.get("/*", (req, res) => {
-  res.status(200).send({ data: "Endpoint is not valid" });
-});
-
+// Export the app as a Firebase Cloud Function
 exports.app = functions.https.onRequest(app);
-
-// const { onRequest } = require("firebase-functions/v2/https");
-// const logger = require("firebase-functions/logger");
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
