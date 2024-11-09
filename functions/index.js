@@ -5,9 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const busboy = require("busboy");
 const axios = require("axios");
-const multer = require("multer");
 require("dotenv").config();
-const upload = multer({ memory: true });
 
 // Firebase Admin SDK configuration
 const { admin, db } = require("./config/firebase-config"); // Ensure firebase-config.js only initializes Firebase once
@@ -28,16 +26,15 @@ app.get("/", (req, res) => {
   res.status(200).send({ data: "AgriLens firebase functions" });
 });
 
-// Analyze endpoint with both Hyperbolic API requests (Qwen and LLAMA)
-app.post("/analyze", (req, res) => {
-  console.log("analyze called");
+// Analyze endpoint for Qwen
+app.post("/analyze/qwen", (req, res) => {
+  console.log("analyze/qwen called");
   if (req.method !== "POST") {
     return res.status(405).end();
   }
 
   const bb = busboy({ headers: req.headers });
   let fileBuffer = null;
-  let requestedInsights = [];
 
   bb.on("file", (name, file) => {
     const chunks = [];
@@ -48,20 +45,13 @@ app.post("/analyze", (req, res) => {
     });
   });
 
-  bb.on("field", (name, val) => {
-    if (name !== "image") {
-      requestedInsights.push(val);
-      console.log(`Processed non-image field ${name}: ${val}.`);
-    }
-  });
-
   bb.on("finish", async () => {
     if (!fileBuffer) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
     const base64Image = fileBuffer.toString("base64");
-    console.log("Sending requests to Hyperbolic APIs...");
+    console.log("Sending request to Hyperbolic API for Qwen...");
 
     try {
       // Hyperbolic API request to Qwen model
@@ -114,11 +104,59 @@ Ensure all fields are filled out based on your analysis of the image.`,
         }
       );
 
+      // Extract and log results
+      const hyperbolicQwenResult = hyperbolicQwenResponse.data.choices[0].message.content;
+      console.log("Received response from Qwen model");
+
+      res.status(200).json({
+        message: "Analysis completed by Qwen model",
+        result: hyperbolicQwenResult,
+      });
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.data : error.message);
+      res.status(500).json({
+        error: "An error occurred during analysis by Qwen model",
+        details: error.response ? error.response.data : error.message,
+      });
+    }
+  });
+
+  bb.end(req.rawBody);
+});
+
+// Analyze endpoint for Llama
+app.post("/analyze/llama", (req, res) => {
+  console.log("analyze/llama called");
+  if (req.method !== "POST") {
+    return res.status(405).end();
+  }
+
+  const bb = busboy({ headers: req.headers });
+  let fileBuffer = null;
+
+  bb.on("file", (name, file) => {
+    const chunks = [];
+    file.on("data", (data) => chunks.push(data));
+    file.on("end", () => {
+      fileBuffer = Buffer.concat(chunks);
+      console.log(`File [${name}] Finished. Size: ${fileBuffer.length} bytes`);
+    });
+  });
+
+  bb.on("finish", async () => {
+    if (!fileBuffer) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    const base64Image = fileBuffer.toString("base64");
+    console.log("Sending request to Hyperbolic API for Llama...");
+
+    try {
       // Hyperbolic API request to LLAMA model
       const hyperbolicLlamaResponse = await axios.post(
         "https://api.hyperbolic.xyz/v1/chat/completions",
         {
-          model: "meta-llama/Llama-3.2-90B-Vision-Instruct",
+          model: "mistralai/Pixtral-12B-2409",
           messages: [
             {
               role: "system",
@@ -165,19 +203,17 @@ Ensure all fields are filled out based on your analysis of the image.`,
       );
 
       // Extract and log results
-      const hyperbolicQwenResult = hyperbolicQwenResponse.data.choices[0].message.content;
       const hyperbolicLlamaResult = hyperbolicLlamaResponse.data.choices[0].message.content;
-      console.log("Received responses from both models");
+      console.log("Received response from Llama model");
 
       res.status(200).json({
-        message: "Analysis completed",
-        hyperbolicQwenResult,
-        hyperbolicLlamaResult,
+        message: "Analysis completed by Llama model",
+        result: hyperbolicLlamaResult,
       });
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
       res.status(500).json({
-        error: "An error occurred during analysis",
+        error: "An error occurred during analysis by Llama model",
         details: error.response ? error.response.data : error.message,
       });
     }
@@ -197,4 +233,3 @@ app.get("/*", (req, res) => {
 
 // Export the app as a Firebase Cloud Function
 exports.app = functions.https.onRequest(app);
-
