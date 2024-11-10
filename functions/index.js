@@ -269,10 +269,16 @@ app.post("/chat/follow-up", async (req, res) => {
   } = req.body;
 
   if (!initialAnalysis || !model || !message) {
+    console.log(
+      ">>>>> ERROR: Missing required parameters: initialAnalysis, model, or message."
+    );
     return res.status(400).json({
       error: "Missing required parameters: initialAnalysis, model, or message",
     });
   }
+
+  console.log(">>>> 11. model: ", model);
+  console.log(">>>> 22. messages: ", message);
 
   // Construct the conversation history
   const basePrompt = `Previous plant analysis: ${JSON.stringify(
@@ -280,7 +286,7 @@ app.post("/chat/follow-up", async (req, res) => {
   )}
 User's follow-up question: ${message}
 
-As a plant health assistant, provide a detailed response to the follow-up question while considering the initial analysis. Focus on providing practical, actionable advice.`;
+As a plant health assistant, provide a detailed response to the follow-up question while considering the initial analysis. Focus on providing practical, actionable advice. Use proper Markdown to format the result content.`;
 
   try {
     const modelConfig = {
@@ -296,7 +302,7 @@ As a plant health assistant, provide a detailed response to the follow-up questi
           {
             role: "system",
             content:
-              "You are an expert plant health assistant. Use the previous analysis and provide specific, detailed answers to follow-up questions. Focus on practical advice and explanations.",
+              "You are an expert plant health assistant chatbot for the AgriLens. This app provides users with a plant diagnosis service, where users can submit a plant picture and AgriLens, using an LVM, provides analysis results. Use the previous analysis and provide specific, detailed answers to follow-up questions. Focus on practical advice and explanations.",
           },
           {
             role: "user",
@@ -316,10 +322,12 @@ As a plant health assistant, provide a detailed response to the follow-up questi
       }
     );
 
+    console.log("response.data: ", response.data.choices[0].message);
+
     // Respond directly without storing conversation history, we should change this in the future
     res.status(200).json({
       message: "Follow-up response generated",
-      result: response.data.choices[0].message.content,
+      response: response.data.choices[0].message.content,
       conversationId: conversationId, // Included for reference only
     });
   } catch (error) {
