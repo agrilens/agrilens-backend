@@ -71,7 +71,7 @@ app.post("/analyze", (req, res) => {
         messages: [
           {
             role: "system",
-            content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following object notation:
+            content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following format:
           {
             "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
             "health_score": <number between 0 and 100>,
@@ -82,7 +82,8 @@ app.post("/analyze", (req, res) => {
               "<recommendation 1>",
               "<recommendation 2>",
               ...
-            ]
+            ],
+            "summary": "Summarize the results you've found including the health score number. This summary will be used as a prompt for follow-up chats.",
           }
           Ensure all fields are filled out based on your analysis of the image.`,
           },
@@ -110,24 +111,33 @@ app.post("/analyze", (req, res) => {
         Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`,
       };
 
-      const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
-        [
-          getAnalysis(apiUrl, modelSpecification, headersSpec),
-          getAnalysis(
-            apiUrl,
-            { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
-            headersSpec
-          ),
-          getPlantIdAnalysis(base64Image, {
-            identification: true,
-            health_assessment: false,
-          }),
-        ]
-      );
+      // const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
+      //   [
+      //     getAnalysis(apiUrl, modelSpecification, headersSpec),
+      //     getAnalysis(
+      //       apiUrl,
+      //       { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
+      //       headersSpec
+      //     ),
+      //     getPlantIdAnalysis(base64Image, {
+      //       identification: true,
+      //       health_assessment: false,
+      //     }),
+      //   ]
+      // );
+      const [qwenResult, llamaResult] = await Promise.allSettled([
+        getAnalysis(apiUrl, modelSpecification, headersSpec),
+        getAnalysis(
+          apiUrl,
+          { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
+          headersSpec
+        ),
+      ]);
 
       // Process Qwen result
       if (qwenResult.status === "fulfilled") {
         results.push(["qwen", qwenResult.value]);
+        console.log(">>> qwenResult added.");
       } else {
         console.error("Qwen analysis failed:", qwenResult.reason);
         results.push([
@@ -142,6 +152,7 @@ app.post("/analyze", (req, res) => {
       // Process LLama result
       if (llamaResult.status === "fulfilled") {
         results.push(["llama", llamaResult.value]);
+        console.log(">>> llamaResult added.");
       } else {
         console.error("LLama analysis failed:", llamaResult.reason);
         results.push([
@@ -153,19 +164,19 @@ app.post("/analyze", (req, res) => {
         ]);
       }
 
-      // Process PlantID result
-      if (plantIDResult.status === "fulfilled") {
-        results.push(["plantid", plantIDResult.value]);
-      } else {
-        console.error("PlantID analysis failed:", plantIDResult.reason);
-        results.push([
-          "plantid",
-          {
-            error: "Failed to retrieve PlantID analysis",
-            details: plantIDResult.reason.message,
-          },
-        ]);
-      }
+      // // Process PlantID result
+      // if (plantIDResult.status === "fulfilled") {
+      //   results.push(["plantid", plantIDResult.value]);
+      // } else {
+      //   console.error("PlantID analysis failed:", plantIDResult.reason);
+      //   results.push([
+      //     "plantid",
+      //     {
+      //       error: "Failed to retrieve PlantID analysis",
+      //       details: plantIDResult.reason.message,
+      //     },
+      //   ]);
+      // }
 
       res.status(200).json({
         message: "Analysis completed and logged",
@@ -322,7 +333,7 @@ As a plant health assistant, provide a detailed response to the follow-up questi
       }
     );
 
-    console.log("response.data: ", response.data.choices[0].message);
+    // console.log("response.data: ", response.data.choices[0].message);
 
     // Respond directly without storing conversation history, we should change this in the future
     res.status(200).json({
