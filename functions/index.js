@@ -222,6 +222,76 @@ Ensure all fields are filled out based on your analysis of the image.`,
   bb.end(req.rawBody);
 });
 
+// Chat Follow-Up Endpoint
+app.post("/chat/follow-up", async (req, res) => {
+  const {
+    initialAnalysis, // The previous analysis result we want to reference
+    model, // 'qwen' or 'llama' to maintain consistency with the same model
+    message, // User's follow-up question
+    conversationId // To maintain chat history (not stored currently) but we should in the future, 
+  } = req.body;
+
+  if (!initialAnalysis || !model || !message) {
+    return res.status(400).json({
+      error: "Missing required parameters: initialAnalysis, model, or message"
+    });
+  }
+
+  // Construct the conversation history
+  const basePrompt = `Previous plant analysis: ${JSON.stringify(initialAnalysis)}
+User's follow-up question: ${message}
+
+As a plant health assistant, provide a detailed response to the follow-up question while considering the initial analysis. Focus on providing practical, actionable advice.`;
+
+  try {
+    const modelConfig = {
+      'qwen': 'Qwen/Qwen2-VL-72B-Instruct',
+      'llama': 'mistralai/Pixtral-12B-2409'
+    };
+
+    const response = await axios.post(
+      "https://api.hyperbolic.xyz/v1/chat/completions",
+      {
+        model: modelConfig[model],
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert plant health assistant. Use the previous analysis and provide specific, detailed answers to follow-up questions. Focus on practical advice and explanations."
+          },
+          {
+            role: "user",
+            content: basePrompt
+          }
+        ],
+        max_tokens: 2048,
+        temperature: 0.7,
+        top_p: 0.9,
+        stream: false
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`
+        }
+      }
+    );
+
+    // Respond directly without storing conversation history, we should change this in the future 
+    res.status(200).json({
+      message: "Follow-up response generated",
+      result: response.data.choices[0].message.content,
+      conversationId: conversationId // Included for reference only
+    });
+
+  } catch (error) {
+    console.error("Error in follow-up chat:", error);
+    res.status(500).json({
+      error: "An error occurred during follow-up analysis",
+      details: error.response ? error.response.data : error.message
+    });
+  }
+});
+
 // Additional routes for user and image handling
 app.use("/users", userRouter);
 app.use("/images", imageRouter);
