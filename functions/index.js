@@ -136,7 +136,7 @@ app.post("/analyze", (req, res) => {
 
       // Process Qwen result
       if (qwenResult.status === "fulfilled") {
-        results.push(["qwen", qwenResult.value]);
+        results.push({ qwen: qwenResult.value });
         console.log(">>> qwenResult added.");
       } else {
         console.error("Qwen analysis failed:", qwenResult.reason);
@@ -151,7 +151,7 @@ app.post("/analyze", (req, res) => {
 
       // Process LLama result
       if (llamaResult.status === "fulfilled") {
-        results.push(["llama", llamaResult.value]);
+        results.push({ llama: llamaResult.value });
         console.log(">>> llamaResult added.");
       } else {
         console.error("LLama analysis failed:", llamaResult.reason);
@@ -200,8 +200,23 @@ const getAnalysis = async (apiUrl, modelSpec, headers) => {
   const apiResponse = await axios.post(apiUrl, modelSpec, {
     headers: headers,
   });
-  const analysisResult = apiResponse.data.choices[0].message.content;
-  // console.log("analysisResult: ", analysisResult);
+  let analysisResult = apiResponse.data.choices[0].message.content;
+  try {
+    if (analysisResult.startsWith("```json")) {
+      const cleanedResult = analysisResult
+        .replace(/^```json/, "")
+        .replace(/```$/, "");
+      const analysisObject = JSON.parse(cleanedResult);
+      analysisResult = analysisObject;
+    } else if (analysisResult.trim().startsWith("{")) {
+      const analysisObject = JSON.parse(analysisResult);
+      analysisResult = analysisObject;
+    } else {
+      console.error("String format not recognized. No need to parse.");
+    }
+  } catch (error) {
+    console.error("Failed to parse JSON string:", error);
+  }
 
   return analysisResult;
 };
@@ -239,8 +254,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
   try {
     // POST request to PlantID
     const postResponse = await axios(config);
-    console.log(">>> 1. Successful POST req to PlantID");
-
     const access_token = postResponse.data.access_token;
 
     // config for PlantId GET request
@@ -251,10 +264,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
     // GET request to retrieve analysis result
     const getResponse = await axios(config);
     apiResponse = getResponse.data;
-    // console.log(
-    //   ">>> 22. Successful GET req to PlantID-info",
-    //   JSON.stringify(getResponse.data)
-    // );
   } catch (error) {
     console.log("An error occurred during request to PlantID API");
     console.error(error);
@@ -265,7 +274,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
   }
 
   // Final analysis result
-  // console.log(">>> 9999. Final PlantID analysisResult: ", apiResponse);
   const result = apiResponse.result.classification;
   return result;
 };
@@ -290,6 +298,7 @@ app.post("/chat/follow-up", async (req, res) => {
 
   console.log(">>>> 11. model: ", model);
   console.log(">>>> 22. messages: ", message);
+  console.log(">>>> 33. initialAnalysis: ", initialAnalysis);
 
   // Construct the conversation history
   const basePrompt = `Previous plant analysis: ${JSON.stringify(
@@ -332,8 +341,6 @@ As a plant health assistant, provide a detailed response to the follow-up questi
         },
       }
     );
-
-    // console.log("response.data: ", response.data.choices[0].message);
 
     // Respond directly without storing conversation history, we should change this in the future
     res.status(200).json({
