@@ -71,7 +71,7 @@ app.post("/analyze", (req, res) => {
         messages: [
           {
             role: "system",
-            content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following object notation:
+            content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following format:
           {
             "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
             "health_score": <number between 0 and 100>,
@@ -82,7 +82,8 @@ app.post("/analyze", (req, res) => {
               "<recommendation 1>",
               "<recommendation 2>",
               ...
-            ]
+            ],
+            "summary": "Summarize the results you've found including the health score number. This summary will be used as a prompt for follow-up chats.",
           }
           Ensure all fields are filled out based on your analysis of the image.`,
           },
@@ -110,24 +111,33 @@ app.post("/analyze", (req, res) => {
         Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`,
       };
 
-      const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
-        [
-          getAnalysis(apiUrl, modelSpecification, headersSpec),
-          getAnalysis(
-            apiUrl,
-            { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
-            headersSpec
-          ),
-          getPlantIdAnalysis(base64Image, {
-            identification: true,
-            health_assessment: false,
-          }),
-        ]
-      );
+      // const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
+      //   [
+      //     getAnalysis(apiUrl, modelSpecification, headersSpec),
+      //     getAnalysis(
+      //       apiUrl,
+      //       { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
+      //       headersSpec
+      //     ),
+      //     getPlantIdAnalysis(base64Image, {
+      //       identification: true,
+      //       health_assessment: false,
+      //     }),
+      //   ]
+      // );
+      const [qwenResult, llamaResult] = await Promise.allSettled([
+        getAnalysis(apiUrl, modelSpecification, headersSpec),
+        getAnalysis(
+          apiUrl,
+          { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
+          headersSpec
+        ),
+      ]);
 
       // Process Qwen result
       if (qwenResult.status === "fulfilled") {
-        results.push(["qwen", qwenResult.value]);
+        results.push({ qwen: qwenResult.value });
+        console.log(">>> qwenResult added.");
       } else {
         console.error("Qwen analysis failed:", qwenResult.reason);
         results.push([
@@ -141,7 +151,8 @@ app.post("/analyze", (req, res) => {
 
       // Process LLama result
       if (llamaResult.status === "fulfilled") {
-        results.push(["llama", llamaResult.value]);
+        results.push({ llama: llamaResult.value });
+        console.log(">>> llamaResult added.");
       } else {
         console.error("LLama analysis failed:", llamaResult.reason);
         results.push([
@@ -153,19 +164,19 @@ app.post("/analyze", (req, res) => {
         ]);
       }
 
-      // Process PlantID result
-      if (plantIDResult.status === "fulfilled") {
-        results.push(["plantid", plantIDResult.value]);
-      } else {
-        console.error("PlantID analysis failed:", plantIDResult.reason);
-        results.push([
-          "plantid",
-          {
-            error: "Failed to retrieve PlantID analysis",
-            details: plantIDResult.reason.message,
-          },
-        ]);
-      }
+      // // Process PlantID result
+      // if (plantIDResult.status === "fulfilled") {
+      //   results.push(["plantid", plantIDResult.value]);
+      // } else {
+      //   console.error("PlantID analysis failed:", plantIDResult.reason);
+      //   results.push([
+      //     "plantid",
+      //     {
+      //       error: "Failed to retrieve PlantID analysis",
+      //       details: plantIDResult.reason.message,
+      //     },
+      //   ]);
+      // }
 
       res.status(200).json({
         message: "Analysis completed and logged",
@@ -189,8 +200,23 @@ const getAnalysis = async (apiUrl, modelSpec, headers) => {
   const apiResponse = await axios.post(apiUrl, modelSpec, {
     headers: headers,
   });
-  const analysisResult = apiResponse.data.choices[0].message.content;
-  // console.log("analysisResult: ", analysisResult);
+  let analysisResult = apiResponse.data.choices[0].message.content;
+  try {
+    if (analysisResult.startsWith("```json")) {
+      const cleanedResult = analysisResult
+        .replace(/^```json/, "")
+        .replace(/```$/, "");
+      const analysisObject = JSON.parse(cleanedResult);
+      analysisResult = analysisObject;
+    } else if (analysisResult.trim().startsWith("{")) {
+      const analysisObject = JSON.parse(analysisResult);
+      analysisResult = analysisObject;
+    } else {
+      console.error("String format not recognized. No need to parse.");
+    }
+  } catch (error) {
+    console.error("Failed to parse JSON string:", error);
+  }
 
   return analysisResult;
 };
@@ -228,8 +254,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
   try {
     // POST request to PlantID
     const postResponse = await axios(config);
-    console.log(">>> 1. Successful POST req to PlantID");
-
     const access_token = postResponse.data.access_token;
 
     // config for PlantId GET request
@@ -240,10 +264,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
     // GET request to retrieve analysis result
     const getResponse = await axios(config);
     apiResponse = getResponse.data;
-    // console.log(
-    //   ">>> 22. Successful GET req to PlantID-info",
-    //   JSON.stringify(getResponse.data)
-    // );
   } catch (error) {
     console.log("An error occurred during request to PlantID API");
     console.error(error);
@@ -254,7 +274,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
   }
 
   // Final analysis result
-  // console.log(">>> 9999. Final PlantID analysisResult: ", apiResponse);
   const result = apiResponse.result.classification;
   return result;
 };
@@ -269,10 +288,17 @@ app.post("/chat/follow-up", async (req, res) => {
   } = req.body;
 
   if (!initialAnalysis || !model || !message) {
+    console.log(
+      ">>>>> ERROR: Missing required parameters: initialAnalysis, model, or message."
+    );
     return res.status(400).json({
       error: "Missing required parameters: initialAnalysis, model, or message",
     });
   }
+
+  console.log(">>>> 11. model: ", model);
+  console.log(">>>> 22. messages: ", message);
+  console.log(">>>> 33. initialAnalysis: ", initialAnalysis);
 
   // Construct the conversation history
   const basePrompt = `Previous plant analysis: ${JSON.stringify(
@@ -280,7 +306,7 @@ app.post("/chat/follow-up", async (req, res) => {
   )}
 User's follow-up question: ${message}
 
-As a plant health assistant, provide a detailed response to the follow-up question while considering the initial analysis. Focus on providing practical, actionable advice.`;
+As a plant health assistant, provide a detailed response to the follow-up question while considering the initial analysis. Focus on providing practical, actionable advice. Use proper Markdown to format the result content.`;
 
   try {
     const modelConfig = {
@@ -296,7 +322,7 @@ As a plant health assistant, provide a detailed response to the follow-up questi
           {
             role: "system",
             content:
-              "You are an expert plant health assistant. Use the previous analysis and provide specific, detailed answers to follow-up questions. Focus on practical advice and explanations.",
+              "You are an expert plant health assistant chatbot for the AgriLens. This app provides users with a plant diagnosis service, where users can submit a plant picture and AgriLens, using an LVM, provides analysis results. Use the previous analysis and provide specific, detailed answers to follow-up questions. Focus on practical advice and explanations.",
           },
           {
             role: "user",
@@ -319,7 +345,7 @@ As a plant health assistant, provide a detailed response to the follow-up questi
     // Respond directly without storing conversation history, we should change this in the future
     res.status(200).json({
       message: "Follow-up response generated",
-      result: response.data.choices[0].message.content,
+      response: response.data.choices[0].message.content,
       conversationId: conversationId, // Included for reference only
     });
   } catch (error) {
