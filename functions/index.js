@@ -1,12 +1,18 @@
 /* eslint-disable */
 const functions = require("firebase-functions");
 // const admin = require("firebase-admin");
-const { admin, db } = require("./config/firebase-config");
+const { admin, db, bucket } = require("./config/firebase-config");
 const express = require("express");
 const cors = require("cors");
 const busboy = require("busboy");
 const axios = require("axios");
 require("dotenv").config();
+
+// Internal Methods
+const uploadImageToFirebase = require("./methods/uploadImageToFirebase");
+const uploadFollowUpToFirebase = require("./methods/uploadFollowUpToFirebase");
+const getAnalysis = require("./methods/getAnalysis");
+const getPlantIdAnalysis = require("./methods/getPlantIdAnalysis");
 
 const app = express();
 app.use(cors());
@@ -29,6 +35,8 @@ app.post("/analyze", (req, res) => {
     // Since the endpoint is `app.post`, this block will never be excuted
     return res.status(405).end();
   }
+
+  const userID = req.headers["userid"];
 
   const bb = busboy({ headers: req.headers });
   let fileBuffer = null;
@@ -61,7 +69,19 @@ app.post("/analyze", (req, res) => {
     console.log("requestedInsights: ", requestedInsights);
 
     try {
-      // console.log("Sending request to Hyperbolic API...");
+      const scanId = Date.now();
+      const fileName = `plant_image_${scanId}.jpg`; // Unique name for each scanned image.
+      // const imageUrl = await uploadImageToFirebase(fileBuffer, f ileName);// Send the binary format to firebase.
+      // Start the image upload asynchronously. This will avoid blocking the rest of api calls.
+      let imageUrl = "";
+      uploadImageToFirebase(userID, scanId, fileBuffer, fileName)
+        .then((imageUrl) => {
+          console.log("Image uploaded to Firebase Storage:", imageUrl);
+        })
+        .catch((err) => {
+          console.error("Failed to upload image:", err);
+        });
+
       const base64Image = fileBuffer.toString("base64");
 
       let results = [];
@@ -73,6 +93,7 @@ app.post("/analyze", (req, res) => {
             role: "system",
             content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following format:
           {
+            "plant_id": "<Common name of the plant or 'None detected'>"
             "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
             "health_score": <number between 0 and 100>,
             "pest_identification": "<description of any pests found or 'None detected'>",
@@ -111,20 +132,8 @@ app.post("/analyze", (req, res) => {
         Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`,
       };
 
+      // Commenting out plantId calls for now
       // const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
-      //   [
-      //     getAnalysis(apiUrl, modelSpecification, headersSpec),
-      //     getAnalysis(
-      //       apiUrl,
-      //       { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
-      //       headersSpec
-      //     ),
-      //     getPlantIdAnalysis(base64Image, {
-      //       identification: true,
-      //       health_assessment: false,
-      //     }),
-      //   ]
-      // );
       const [qwenResult, llamaResult] = await Promise.allSettled([
         getAnalysis(apiUrl, modelSpecification, headersSpec),
         getAnalysis(
@@ -132,6 +141,10 @@ app.post("/analyze", (req, res) => {
           { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
           headersSpec
         ),
+        // getPlantIdAnalysis(base64Image, {
+        //   identification: true,
+        //   health_assessment: false,
+        // }),
       ]);
 
       // Process Qwen result
@@ -181,6 +194,8 @@ app.post("/analyze", (req, res) => {
       res.status(200).json({
         message: "Analysis completed and logged",
         // id: docRef.id,
+        imageUrl: imageUrl,
+        scanId: scanId,
         results: results,
       });
     } catch (error) {
@@ -195,89 +210,6 @@ app.post("/analyze", (req, res) => {
   bb.end(req.rawBody);
 });
 
-const getAnalysis = async (apiUrl, modelSpec, headers) => {
-  console.log("getAalyzes() called.", modelSpec.model);
-  const apiResponse = await axios.post(apiUrl, modelSpec, {
-    headers: headers,
-  });
-  let analysisResult = apiResponse.data.choices[0].message.content;
-  try {
-    if (analysisResult.startsWith("```json")) {
-      const cleanedResult = analysisResult
-        .replace(/^```json/, "")
-        .replace(/```$/, "");
-      const analysisObject = JSON.parse(cleanedResult);
-      analysisResult = analysisObject;
-    } else if (analysisResult.trim().startsWith("{")) {
-      const analysisObject = JSON.parse(analysisResult);
-      analysisResult = analysisObject;
-    } else {
-      console.error("String format not recognized. No need to parse.");
-    }
-  } catch (error) {
-    console.error("Failed to parse JSON string:", error);
-  }
-
-  return analysisResult;
-};
-
-const getPlantIdAnalysis = async (imageData, insights) => {
-  console.log("getPlantIdAnalysis() called.");
-
-  // Construct the request payload
-  let data = JSON.stringify({
-    images: [imageData],
-    latitude: 49.207, // Default values
-    longitude: 16.608,
-    // similar_images: true, // True returns simmilar images, if exists, to the input image
-  });
-
-  // TODO
-  let requestType = insights.identification
-    ? "identification"
-    : "health_assessment";
-
-  // Initial POST request config
-  let config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: "https://plant.id/api/v3/identification", // TODO
-    headers: {
-      "Api-Key": process.env.PLANT_ID_API_KEY,
-      "Content-Type": "application/json",
-    },
-    data: data,
-  };
-
-  let apiResponse = "";
-
-  try {
-    // POST request to PlantID
-    const postResponse = await axios(config);
-    const access_token = postResponse.data.access_token;
-
-    // config for PlantId GET request
-    config.method = "get";
-    config.url = `https://plant.id/api/v3/identification/${access_token}?details=common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering&language=en`;
-    config.data = null; // Clear out data as it is not needed for GET
-
-    // GET request to retrieve analysis result
-    const getResponse = await axios(config);
-    apiResponse = getResponse.data;
-  } catch (error) {
-    console.log("An error occurred during request to PlantID API");
-    console.error(error);
-    return {
-      error: "An error occurred during request to PlantID API",
-      details: error.message,
-    };
-  }
-
-  // Final analysis result
-  const result = apiResponse.result.classification;
-  return result;
-};
-
 // Chat Follow-Up Endpoint
 app.post("/chat/follow-up", async (req, res) => {
   const {
@@ -285,20 +217,27 @@ app.post("/chat/follow-up", async (req, res) => {
     model, // 'qwen' or 'llama' to maintain consistency with the same model
     message, // User's follow-up question
     conversationId, // To maintain chat history (not stored currently) but we should in the future,
+    userID,
   } = req.body;
 
   if (!initialAnalysis || !model || !message) {
-    console.log(
-      ">>>>> ERROR: Missing required parameters: initialAnalysis, model, or message."
-    );
+    // console.log(">>>>> ERROR: Missing required parameters.");
     return res.status(400).json({
       error: "Missing required parameters: initialAnalysis, model, or message",
     });
   }
+  uploadFollowUpToFirebase(
+    userID,
+    conversationId,
+    "user",
+    message,
+    initialAnalysis
+  );
 
   console.log(">>>> 11. model: ", model);
   console.log(">>>> 22. messages: ", message);
   console.log(">>>> 33. initialAnalysis: ", initialAnalysis);
+  console.log(">>>> 44. conversationId: ", conversationId);
 
   // Construct the conversation history
   const basePrompt = `Previous plant analysis: ${JSON.stringify(
@@ -342,10 +281,19 @@ As a plant health assistant, provide a detailed response to the follow-up questi
       }
     );
 
+    const modelReponse = response?.data?.choices[0].message?.content;
+    uploadFollowUpToFirebase(
+      userID,
+      conversationId,
+      model,
+      modelReponse,
+      initialAnalysis
+    );
+
     // Respond directly without storing conversation history, we should change this in the future
     res.status(200).json({
       message: "Follow-up response generated",
-      response: response.data.choices[0].message.content,
+      response: modelReponse,
       conversationId: conversationId, // Included for reference only
     });
   } catch (error) {
