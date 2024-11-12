@@ -93,6 +93,7 @@ app.post("/analyze", (req, res) => {
             role: "system",
             content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following format:
           {
+            "plant_id": "<Common name of the plant or 'None detected'>"
             "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
             "health_score": <number between 0 and 100>,
             "pest_identification": "<description of any pests found or 'None detected'>",
