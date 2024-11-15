@@ -1,3 +1,9 @@
+# AgriLens Backend Repo
+
+## Works Cited & Sources
+
+- We used generative AI in this project. Artifacts and other documents where we used generative AI contain a note about the source and a link to the conversation. 
+
 ## Installations     
 - `npm install -g firebase-tools` firebase tools for CLI. // Required only for the first time.    
 - 
