@@ -1,6 +1,12 @@
 const { db, bucket } = require("../config/firebase-config");
 
-const uploadImageToFirebase = async (userID, scanId, fileBuffer, fileName) => {
+const uploadImageToFirebase = async (
+  userID,
+  scanId,
+  fileBuffer,
+  fileName,
+  defaultEvaluation = []
+) => {
   console.log(">>> uploadImageToFirebase() called");
   const file = bucket.file(`scanned-images/${fileName}`);
 
@@ -35,8 +41,24 @@ const uploadImageToFirebase = async (userID, scanId, fileBuffer, fileName) => {
             .collection("scan-history")
             .doc(docId);
 
+          // await historyRef.set({
+          //   imageUrl,
+          //   plant_id,
+          //   overall_health_status,
+          //   health_score,
+          //   pest_identification,
+          //   disease_identification,
+          //   weed_presence,
+          //   recommendations,
+          //   summary,
+          // });
+
           // Set the chat data
-          await historyRef.set({ imageUrl, timestamp: Date.now().toString() }); // Using merge to keeps existing images
+          await historyRef.set({
+            imageUrl,
+            defaultEvaluation,
+            timestamp: Date.now().toString(),
+          }); // Using merge to keeps existing images
           console.log(
             ">>>> 100. ImageUrl entry added successfully to customer's db! docId: ",
             docId

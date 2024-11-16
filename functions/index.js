@@ -74,13 +74,6 @@ app.post("/analyze", (req, res) => {
       // const imageUrl = await uploadImageToFirebase(fileBuffer, f ileName);// Send the binary format to firebase.
       // Start the image upload asynchronously. This will avoid blocking the rest of api calls.
       let imageUrl = "";
-      uploadImageToFirebase(userID, scanId, fileBuffer, fileName)
-        .then((imageUrl) => {
-          console.log("Image uploaded to Firebase Storage:", imageUrl);
-        })
-        .catch((err) => {
-          console.error("Failed to upload image:", err);
-        });
 
       const base64Image = fileBuffer.toString("base64");
 
@@ -190,6 +183,20 @@ app.post("/analyze", (req, res) => {
       //     },
       //   ]);
       // }
+
+      uploadImageToFirebase(
+        userID,
+        scanId,
+        fileBuffer,
+        fileName,
+        results.length > 0 ? results[0] : []
+      )
+        .then((imageUrl) => {
+          console.log("Image uploaded to Firebase Storage:", imageUrl);
+        })
+        .catch((err) => {
+          console.error("Failed to upload image:", err);
+        });
 
       res.status(200).json({
         message: "Analysis completed and logged",
