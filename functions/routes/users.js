@@ -109,10 +109,10 @@ router.get("/:customerId/chat-history/", async (req, res) => {
   }
 });
 
-router.get("/:customerId/scan-history/", async (req, res) => {
-  const { customerId } = req.params; // Extract customer ID and account ID from URL parameters
+router.get("/scan-history", async (req, res) => {
+  const customerId = req.headers["userid"]; // Extract customer ID from request header.
 
-  console.log("66. customerId: ", customerId);
+  // console.log("66. customerId: ", customerId);
   try {
     // Reference to the specific scan hitory
     const historyRef = db
@@ -131,7 +131,7 @@ router.get("/:customerId/scan-history/", async (req, res) => {
 
     const scans = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-    console.log("69. scans: ", scans);
+    // console.log("69. scans: ", scans);
 
     // Respond with the accounts
     res.status(200).json({
@@ -296,6 +296,47 @@ router.put("/:customerId/account", async (req, res) => {
     res
       .status(500)
       .json({ message: "Error saving account data.", error: error.message });
+  }
+});
+
+router.put("/save-evaluation", async (req, res) => {
+  const customerId = req.headers["userid"];
+  const { scanId, evaluation } = req.body;
+
+  // Validate required fields
+  if (!customerId || !scanId || !evaluation) {
+    console.error("Missing required fields:", {
+      customerId,
+      scanId,
+      evaluation,
+    });
+    return res.status(400).json({ message: "Missing required fields." });
+  }
+
+  try {
+    const docId = scanId.toString(); //
+    // console.log("Firestore Path:", `users/customers/customer/${customerId}/scan-history/${docId}`);
+
+    // Firestore document reference
+    const accountRef = db
+      .collection("users")
+      .doc("customers")
+      .collection("customer")
+      .doc(customerId)
+      .collection("scan-history")
+      .doc(docId);
+
+    // Set the data with merge option
+    await accountRef.set({ selectedEvaluation: evaluation }, { merge: true });
+    console.log("Evaluation saved successfully for doc:", docId);
+
+    res.status(201).json({ message: "Evaluation saved successfully!" });
+  } catch (error) {
+    console.error("Error saving evaluation data:", error);
+    res.status(500).json({
+      message: "Error saving evaluation data.",
+      error: error.message,
+    });
   }
 });
 
