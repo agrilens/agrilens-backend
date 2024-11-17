@@ -15,3 +15,5 @@ const serviceAccountObj = {
 };
 
 module.exports = serviceAccountObj;
+
+// project_bucket_name: process.env.PROJECT_BUCKET_NAME,
