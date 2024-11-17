@@ -41,18 +41,6 @@ const uploadImageToFirebase = async (
             .collection("scan-history")
             .doc(docId);
 
-          // await historyRef.set({
-          //   imageUrl,
-          //   plant_id,
-          //   overall_health_status,
-          //   health_score,
-          //   pest_identification,
-          //   disease_identification,
-          //   weed_presence,
-          //   recommendations,
-          //   summary,
-          // });
-
           // Set the chat data
           await historyRef.set({
             imageUrl,
