@@ -6,15 +6,15 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
   },
-  extends: ["eslint:recommended", "google"],
+  extends: ["eslint:recommended", "google", "prettier"],
   rules: {
     "no-restricted-globals": ["error", "name", "length"],
     "prefer-arrow-callback": "error",
     "no-unused-vars": ["warn"],
     "object-curly-spacing": ["off"],
     "require-jsdoc": "off",
-    "quotes": ["error", "double", { allowTemplateLiterals: true }],
-    "new-cap": ["error", { "capIsNew": false }],
+    quotes: ["error", "double", { allowTemplateLiterals: true }],
+    "new-cap": ["error", { capIsNew: false }],
   },
   overrides: [
     {
