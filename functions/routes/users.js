@@ -40,8 +40,8 @@ router.get("/all", async (req, res) => {
   }
 });
 
-router.get("/:customerId/account/", async (req, res) => {
-  const { customerId } = req.params; // Extract customer ID and account ID from URL parameters
+router.get("/account", async (req, res) => {
+  const customerId = req.headers["userid"]; // Extract customer ID from request header.
 
   try {
     // Reference to the specific account document
@@ -77,35 +77,46 @@ router.get("/:customerId/account/", async (req, res) => {
   }
 });
 
-router.get("/:customerId/chat-history/", async (req, res) => {
-  const { customerId } = req.params;
+router.get("/chat-history/recent", async (req, res) => {
+  const customerId = req.headers["userid"];
 
-  // console.log("88. customerId: ", customerId);
+  if (!customerId) {
+    return res.status(400).json({ message: "User ID is required in headers." });
+  }
+
   try {
-    // Reference to the specific scan hitory
+    // Reference to the chat-history collection
     const historyRef = db
       .collection("users")
       .doc("customers")
       .collection("customer")
       .doc(customerId)
-      .collection("chat-history")
-      .orderBy("timestamp", "desc");
+      .collection("chat-history");
 
     const snapshot = await historyRef.get();
 
-    const chats = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    if (snapshot.empty) {
+      return res.status(404).json({ message: "No chat history found." });
+    }
 
-    // console.log("91. scans: ", chats);
-
+    // Extract the most recent document
+    const recentChat = snapshot.docs[snapshot.size - 1];
+    const docId = recentChat.id;
+    const conversations = recentChat.data().conversations || [];
+    const initialAnalysisSummary =
+      recentChat.data().initialAnalysisSummary || "";
+    // console.log("docId: ", docId);
     res.status(200).json({
-      message: "Scan history retrieved successfully!",
-      chats,
+      message: "Recent chat history retrieved successfully!",
+      docId,
+      conversations,
+      initialAnalysisSummary,
     });
   } catch (error) {
-    console.error("Error fetching scan history:", error);
+    console.error("Error fetching chat history:", error);
     res
       .status(500)
-      .json({ message: "Error fetching scan history.", error: error.message });
+      .json({ message: "Error fetching chat history.", error: error.message });
   }
 });
 
@@ -213,7 +224,7 @@ router.post("/:customerId/chat-history", async (req, res) => {
   const { customerId } = req.params;
   const { message, sender } = req.body; // Expect message and timestamp in the request body
 
-  console.log("message: ", message);
+  // console.log("message: ", message);
   try {
     const docId = Date.now().toString();
     // Reference to the chat-history collection

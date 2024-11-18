@@ -9,7 +9,7 @@ const uploadFollowUpToFirebase = async (
 ) => {
   try {
     // Reference to the chat-history collection
-    console.log("userID: ", userID);
+    // console.log("userID: ", userID);
     const docId = chatId.toString();
     const customerId = userID ? userID : "OQ79MAoXE9SMin2WhUzNV5vyTm73"; // Ensure to replace this with actual customer ID
     const historyRef = db
@@ -24,10 +24,11 @@ const uploadFollowUpToFirebase = async (
     const chatData = {
       sender,
       message,
+      direction: sender === "user" ? "outgoing" : "incoming",
       timestamp: Date.now().toString(),
     };
 
-    console.log("initialAnalysisSummary: ", initialAnalysisSummary);
+    // console.log("initialAnalysisSummary: ", initialAnalysisSummary);
 
     // Fetch the existing chat document
     const docSnapshot = await historyRef.get();
