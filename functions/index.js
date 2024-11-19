@@ -80,7 +80,7 @@ app.post("/analyze", (req, res) => {
       let results = [];
       let apiUrl = "https://api.hyperbolic.xyz/v1/chat/completions";
       let modelSpecification = {
-        model: "Qwen/Qwen2-VL-72B-Instruct",
+        model: "Qwen/Qwen2-VL-7B-Instruct",
         messages: [
           {
             role: "system",
