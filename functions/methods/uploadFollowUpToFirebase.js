@@ -52,16 +52,16 @@ const uploadFollowUpToFirebase = async (
         conversations: currentConversations,
       });
 
-      console.log(">>>> Chat entry added to customer's db! docId: ", docId);
+      // console.log(">>>> Chat entry added to customer's db! docId: ", docId);
     } else {
-      console.log("No existing chat document found, creating a new one.");
+      // console.log("No existing chat document found, creating a new one.");
       // If the document doesn't exist, create a new one with the chat data
       await historyRef.set({
         initialAnalysisSummary,
         conversations: [chatData],
       });
 
-      console.log(">>>> 400. New chat document created successfully!");
+      // console.log(">>>> 400. New chat document created successfully!");
     }
   } catch (error) {
     console.error("Error adding chat entry:", error);
