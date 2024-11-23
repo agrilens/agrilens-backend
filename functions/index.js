@@ -66,7 +66,7 @@ app.post("/analyze", (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    console.log("requestedInsights: ", requestedInsights);
+    // console.log("requestedInsights: ", requestedInsights);
 
     try {
       const scanId = Date.now();
@@ -74,32 +74,44 @@ app.post("/analyze", (req, res) => {
       // const imageUrl = await uploadImageToFirebase(fileBuffer, f ileName);// Send the binary format to firebase.
       // Start the image upload asynchronously. This will avoid blocking the rest of api calls.
       let imageUrl = "";
+      let isImageValid = true;
 
       const base64Image = fileBuffer.toString("base64");
+      // const userSelectedInsights =
+      //   requestedInsights.length !== 0
+      //     ? `The user has requested only the following insights: ${requestedInsights.join(", ")}.`
+      //     : ""; // The user has not requested any specific insights.
+
+      // console.log("userSelectedInsights:", userSelectedInsights);
 
       let results = [];
       let apiUrl = "https://api.hyperbolic.xyz/v1/chat/completions";
       let modelSpecification = {
-        model: "Qwen/Qwen2-VL-72B-Instruct",
+        model: "Qwen/Qwen2-VL-7B-Instruct",
         messages: [
           {
             role: "system",
-            content: `You are an AI assistant specialized in plant health analysis. Analyze the given image and provide a structured response in the following format:
-          {
-            "plant_id": "<Common name of the plant or 'None detected'>"
-            "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
-            "health_score": <number between 0 and 100>,
-            "pest_identification": "<description of any pests found or 'None detected'>",
-            "disease_identification": "<description of any diseases found or 'None detected'>",
-            "weed_presence": "<description of any weeds found or 'None detected'>",
-            "recommendations": [
-              "<recommendation 1>",
-              "<recommendation 2>",
-              ...
-            ],
-            "summary": "Summarize the results you've found including the health score number. This summary will be used as a prompt for follow-up chats.",
-          }
-          Ensure all fields are filled out based on your analysis of the image.`,
+            content: `You are an AI assistant specialized in plant health analysis.
+            Analyze the given image and provide a structured response in the following format:
+              {
+                "plant_id": "<Common name of the plant or 'None detected'>",
+                "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
+                "health_score": <number between 0 and 100>,
+                "pest_identification": "<description of any pests found or 'None detected'>",
+                "disease_identification": "<description of any diseases found or 'None detected'>",
+                "weed_presence": "<description of any weeds found or 'None detected'>",
+                "recommendations": [
+                  "<recommendation 1>",
+                  "<recommendation 2>",
+                  ...
+                ],
+                "summary": "Summarize the results you've found, including the health score number. This summary will be used as a prompt for follow-up chats."
+              }
+              Ensure all fields are filled out based on your analysis of the image. If the provided image is not a plant image, respond with just:
+              {
+                "plant_id": "Invalid Plant Image"
+              }
+              `,
           },
           {
             role: "user",
@@ -142,8 +154,18 @@ app.post("/analyze", (req, res) => {
 
       // Process Qwen result
       if (qwenResult.status === "fulfilled") {
-        results.push({ qwen: qwenResult.value });
-        console.log(">>> qwenResult added.");
+        if (
+          qwenResult.value.plant_id === "Invalid Plant Image" ||
+          qwenResult.value.summary
+            .toLowerCase()
+            .includes("image does not contain a plant")
+        ) {
+          isImageValid = false;
+        } else {
+          results.push({ qwen: qwenResult.value });
+          isImageValid = true;
+        }
+        console.log(">>> qwenResult added.: ", qwenResult.value.plant_id);
       } else {
         console.error("Qwen analysis failed:", qwenResult.reason);
         results.push([
@@ -157,7 +179,12 @@ app.post("/analyze", (req, res) => {
 
       // Process LLama result
       if (llamaResult.status === "fulfilled") {
-        results.push({ llama: llamaResult.value });
+        if (llamaResult.value.plant_id === "Invalid Plant Image") {
+          isImageValid = false;
+        } else {
+          results.push({ llama: llamaResult.value });
+          isImageValid = true;
+        }
         console.log(">>> llamaResult added.");
       } else {
         console.error("LLama analysis failed:", llamaResult.reason);
@@ -189,7 +216,7 @@ app.post("/analyze", (req, res) => {
         scanId,
         fileBuffer,
         fileName,
-        results.length > 0 ? results[0] : []
+        results.length > 0 && isImageValid ? results[0] : []
       )
         .then((imageUrl) => {
           console.log("Image uploaded to Firebase Storage:", imageUrl);
@@ -200,7 +227,7 @@ app.post("/analyze", (req, res) => {
 
       res.status(200).json({
         message: "Analysis completed and logged",
-        // id: docRef.id,
+        isImageValid: isImageValid,
         imageUrl: imageUrl,
         scanId: scanId,
         results: results,

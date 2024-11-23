@@ -9,7 +9,7 @@ const uploadFollowUpToFirebase = async (
 ) => {
   try {
     // Reference to the chat-history collection
-    console.log("userID: ", userID);
+    // console.log("userID: ", userID);
     const docId = chatId.toString();
     const customerId = userID ? userID : "OQ79MAoXE9SMin2WhUzNV5vyTm73"; // Ensure to replace this with actual customer ID
     const historyRef = db
@@ -24,10 +24,11 @@ const uploadFollowUpToFirebase = async (
     const chatData = {
       sender,
       message,
+      direction: sender === "user" ? "outgoing" : "incoming",
       timestamp: Date.now().toString(),
     };
 
-    console.log("initialAnalysisSummary: ", initialAnalysisSummary);
+    // console.log("initialAnalysisSummary: ", initialAnalysisSummary);
 
     // Fetch the existing chat document
     const docSnapshot = await historyRef.get();
@@ -51,16 +52,16 @@ const uploadFollowUpToFirebase = async (
         conversations: currentConversations,
       });
 
-      console.log(">>>> Chat entry added to customer's db! docId: ", docId);
+      // console.log(">>>> Chat entry added to customer's db! docId: ", docId);
     } else {
-      console.log("No existing chat document found, creating a new one.");
+      // console.log("No existing chat document found, creating a new one.");
       // If the document doesn't exist, create a new one with the chat data
       await historyRef.set({
         initialAnalysisSummary,
         conversations: [chatData],
       });
 
-      console.log(">>>> 400. New chat document created successfully!");
+      // console.log(">>>> 400. New chat document created successfully!");
     }
   } catch (error) {
     console.error("Error adding chat entry:", error);
