@@ -167,14 +167,17 @@ app.post("/analyze", (req, res) => {
         }
         console.log(">>> qwenResult added.: ", qwenResult.value.plant_id);
       } else {
+        console.log(
+          ">>> Qwen analysis failed: Request failed with status code 401"
+        );
         console.error("Qwen analysis failed:", qwenResult.reason);
-        results.push([
-          "qwen",
-          {
-            error: "Failed to retrieve Qwen analysis",
-            details: qwenResult.reason.message,
-          },
-        ]);
+        // results.push([
+        //   "qwen",
+        //   {
+        //     error: "Failed to retrieve Qwen analysis",
+        //     details: qwenResult.reason.message,
+        //   },
+        // ]);
       }
 
       // Process LLama result
@@ -187,14 +190,17 @@ app.post("/analyze", (req, res) => {
         }
         console.log(">>> llamaResult added.");
       } else {
+        console.log(
+          ">>> LLama analysis failed: Request failed with status code 401"
+        );
         console.error("LLama analysis failed:", llamaResult.reason);
-        results.push([
-          "llama",
-          {
-            error: "Failed to retrieve LLama analysis",
-            details: llamaResult.reason.message,
-          },
-        ]);
+        // results.push([
+        //   "llama",
+        //   {
+        //     error: "Failed to retrieve LLama analysis",
+        //     details: llamaResult.reason.message,
+        //   },
+        // ]);
       }
 
       // // Process PlantID result
