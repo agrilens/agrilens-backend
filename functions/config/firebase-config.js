@@ -8,7 +8,7 @@ const serviceAccountObj = require("./serviceAccountKeys");
 // Initialize Firebase Admin SDK with the service account
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountObj),
-  databaseURL: "https://agrilens-web.firebaseio.com", // Firestore database URL
+  databaseURL: process.env.PROJECT_DATABASE_URL, // Firestore database URL
   storageBucket: process.env.PROJECT_BUCKET_NAME,
 });
 
