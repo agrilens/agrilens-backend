@@ -92,9 +92,14 @@ app.post("/analyze", (req, res) => {
           {
             role: "system",
             content: `You are an AI assistant specialized in plant health analysis.
+            If the provided image is not a plant image, respond with just:
+              {
+                "plant_id": "Invalid Plant Image"
+              }
+            If the provided image is of a plant,  
             Analyze the given image and provide a structured response in the following format:
               {
-                "plant_id": "<Common name of the plant or 'None detected'>",
+                "plant_id": "<Common name of the plant or 'None detected' or 'Invalid Plant Image'>",
                 "overall_health_status": "Healthy|Mild Issues|Moderate Issues|Severe Issues",
                 "health_score": <number between 0 and 100>,
                 "pest_identification": "<description of any pests found or 'None detected'>",
@@ -107,10 +112,7 @@ app.post("/analyze", (req, res) => {
                 ],
                 "summary": "Summarize the results you've found, including the health score number. This summary will be used as a prompt for follow-up chats."
               }
-              Ensure all fields are filled out based on your analysis of the image. If the provided image is not a plant image, respond with just:
-              {
-                "plant_id": "Invalid Plant Image"
-              }
+              Ensure all fields are filled out based on your analysis of the image. 
               `,
           },
           {
