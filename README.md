@@ -1,8 +1,7 @@
 # AgriLens Backend Repo
 
-## Works Cited & Sources
-
-- We used generative AI in this project. Artifacts and other documents where we used generative AI contain a note about the source and a link to the conversation. 
+# AgriLens Developer Guide: 
+### https://github.com/agrilens/docs/blob/main/developer-guide.md
 
 ## Installations     
 - `npm install -g firebase-tools` firebase tools for CLI. // Required only for the first time.    
@@ -15,16 +14,18 @@
 - 3. The api endpoints will be activated at `http://127.0.0.1:5001/agrilens-web/us-central1/app`
 
 ## Dependencies:     
-     
-npm init -y     
-npm i express     
-npm i firebase-admin     
-npm i nodemon     
-npm i dotenv     
-     
-npm install -g firebase-tools     
-     
-     
+  - axios     
+  - busboy         
+  - cors     
+  - dotenv     
+  - ejs     
+  - express     
+  - firebase-admin     
+  - firebase-functions     
+  - multer     
+  
+## Setting Up and Deploying Firebase Functions with Environment Variables  
+npm install -g firebase-tools          
 firebase init functions          
 
 npm run server   // Localhost serve     
@@ -32,3 +33,8 @@ npm run server   // Localhost serve
 ### Deploy functions and verify that environment variables were loaded:   
 `firebase deploy`  // Deploys `functions/` directory.                 
 `firebase deploy --only functions`   // Deploys only the `functions`                     
+
+
+## Works Cited & Sources
+
+- We used generative AI in this project. Artifacts and other documents where we used generative AI contain a note about the source and a link to the conversation. 
