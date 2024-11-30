@@ -8,7 +8,6 @@ const getPlantIdAnalysis = async (imageData, insights) => {
     images: [imageData],
     latitude: 49.207, // Default values
     longitude: 16.608,
-    // similar_images: true, // True returns simmilar images, if exists, to the input image
   });
 
   // TODO
@@ -52,9 +51,28 @@ const getPlantIdAnalysis = async (imageData, insights) => {
     };
   }
 
-  // Final analysis result
-  const result = apiResponse.result.classification;
-  return result;
+  // const result = apiResponse.result.classification;
+  // return result;
+
+  // Extract and filter the first suggestion
+  const firstSuggestion = apiResponse.result.classification.suggestions[0];
+  if (!firstSuggestion) {
+    return { error: "No suggestions found." };
+  }
+
+  const filteredResult = {
+    name: firstSuggestion.name,
+    probability: firstSuggestion.probability,
+    details: {
+      common_names: firstSuggestion.details.common_names,
+      description: {
+        value: firstSuggestion.details.description.value,
+        citation: firstSuggestion.details.description.citation,
+      },
+    },
+  };
+
+  return filteredResult;
 };
 
 module.exports = getPlantIdAnalysis;
