@@ -134,7 +134,6 @@ app.post("/analyze", (req, res) => {
         Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`,
       };
 
-      // Commenting out plantId calls for now
       const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
         [
           getAnalysis(apiUrl, modelSpecification, headersSpec),
