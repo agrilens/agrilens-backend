@@ -25,8 +25,10 @@ const userRouter = require("./routes/users");
 const imageRouter = require("./routes/images");
 const usersApi = require("./routes/api/db");
 
+app.use(middleware.decodeToken);
+
 app.get("/", (req, res) => {
-  res.status(200).send({ data: "AgriLens firebase functions" });
+  res.status(200).send({ data: "Authorized: AgriLens firebase functions" });
 });
 
 app.post("/analyze", (req, res) => {
@@ -350,11 +352,6 @@ As a plant health assistant, provide a detailed response to the follow-up questi
 app.use("/users", userRouter);
 app.use("/images", imageRouter);
 app.use("/api/users", usersApi);
-
-// app.use(middleware.decodeToken);
-app.get("/auth", (req, res) => {
-  res.status(200).send({ data: "Authorized: AgriLens firebase functions" });
-});
 
 app.get("/*", (req, res) => {
   res.status(200).send({ data: "Endpoint is not valid" });
