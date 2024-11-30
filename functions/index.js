@@ -65,8 +65,6 @@ app.post("/analyze", (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    // console.log("requestedInsights: ", requestedInsights);
-
     try {
       const scanId = Date.now();
       const fileName = `plant_image_${scanId}.jpg`; // Unique name for each scanned image.
@@ -76,14 +74,12 @@ app.post("/analyze", (req, res) => {
       let isImageValid = true;
 
       const base64Image = fileBuffer.toString("base64");
-      // const userSelectedInsights =
-      //   requestedInsights.length !== 0
-      //     ? `The user has requested only the following insights: ${requestedInsights.join(", ")}.`
-      //     : ""; // The user has not requested any specific insights.
-
-      // console.log("userSelectedInsights:", userSelectedInsights);
 
       let results = [];
+      let userRequest = "";
+      if (requestedInsights.length < 4)
+        userRequest = `The user requested only the following insights: ${requestedInsights}. For the remaining fields, leave empty value".`;
+
       let apiUrl = "https://api.hyperbolic.xyz/v1/chat/completions";
       let modelSpecification = {
         model: "Qwen/Qwen2-VL-7B-Instruct",
@@ -139,19 +135,20 @@ app.post("/analyze", (req, res) => {
       };
 
       // Commenting out plantId calls for now
-      // const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
-      const [qwenResult, llamaResult] = await Promise.allSettled([
-        getAnalysis(apiUrl, modelSpecification, headersSpec),
-        getAnalysis(
-          apiUrl,
-          { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
-          headersSpec
-        ),
-        // getPlantIdAnalysis(base64Image, {
-        //   identification: true,
-        //   health_assessment: false,
-        // }),
-      ]);
+      const [qwenResult, llamaResult, plantIDResult] = await Promise.allSettled(
+        [
+          getAnalysis(apiUrl, modelSpecification, headersSpec),
+          getAnalysis(
+            apiUrl,
+            { ...modelSpecification, model: "mistralai/Pixtral-12B-2409" },
+            headersSpec
+          ),
+          getPlantIdAnalysis(base64Image, {
+            identification: true,
+            health_assessment: false,
+          }),
+        ]
+      );
 
       // Process Qwen result
       if (qwenResult.status === "fulfilled") {
@@ -172,13 +169,6 @@ app.post("/analyze", (req, res) => {
           ">>> Qwen analysis failed: Request failed with status code 401"
         );
         console.error("Qwen analysis failed:", qwenResult.reason);
-        // results.push([
-        //   "qwen",
-        //   {
-        //     error: "Failed to retrieve Qwen analysis",
-        //     details: qwenResult.reason.message,
-        //   },
-        // ]);
       }
 
       // Process LLama result
@@ -195,42 +185,30 @@ app.post("/analyze", (req, res) => {
           ">>> LLama analysis failed: Request failed with status code 401"
         );
         console.error("LLama analysis failed:", llamaResult.reason);
-        // results.push([
-        //   "llama",
-        //   {
-        //     error: "Failed to retrieve LLama analysis",
-        //     details: llamaResult.reason.message,
-        //   },
-        // ]);
       }
 
-      // // Process PlantID result
-      // if (plantIDResult.status === "fulfilled") {
-      //   results.push(["plantid", plantIDResult.value]);
-      // } else {
-      //   console.error("PlantID analysis failed:", plantIDResult.reason);
-      //   results.push([
-      //     "plantid",
-      //     {
-      //       error: "Failed to retrieve PlantID analysis",
-      //       details: plantIDResult.reason.message,
-      //     },
-      //   ]);
-      // }
+      if (isImageValid) {
+        // Process PlantID result
+        if (plantIDResult.status === "fulfilled") {
+          results.push({ plantid: plantIDResult.value });
+        } else {
+          console.error("PlantID analysis failed:", plantIDResult.reason);
+        }
 
-      uploadImageToFirebase(
-        userID,
-        scanId,
-        fileBuffer,
-        fileName,
-        results.length > 0 && isImageValid ? results[0] : []
-      )
-        .then((imageUrl) => {
-          console.log("Image uploaded to Firebase Storage:", imageUrl);
-        })
-        .catch((err) => {
-          console.error("Failed to upload image:", err);
-        });
+        uploadImageToFirebase(
+          userID,
+          scanId,
+          fileBuffer,
+          fileName,
+          results.length > 0 && isImageValid ? results[0] : []
+        )
+          .then((imageUrl) => {
+            console.log(">>>> Image uploaded to Firebase Storage:", imageUrl);
+          })
+          .catch((err) => {
+            console.error("Failed to upload image:", err);
+          });
+      }
 
       res.status(200).json({
         message: "Analysis completed and logged",
@@ -262,7 +240,6 @@ app.post("/chat/follow-up", async (req, res) => {
   } = req.body;
 
   if (!initialAnalysis || !model || !message) {
-    // console.log(">>>>> ERROR: Missing required parameters.");
     return res.status(400).json({
       error: "Missing required parameters: initialAnalysis, model, or message",
     });

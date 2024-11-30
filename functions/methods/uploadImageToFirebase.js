@@ -7,7 +7,6 @@ const uploadImageToFirebase = async (
   fileName,
   defaultEvaluation = []
 ) => {
-  // console.log(">>> uploadImageToFirebase() called");
   const file = bucket.file(`scanned-images/${fileName}`);
 
   return new Promise((resolve, reject) => {
@@ -46,14 +45,8 @@ const uploadImageToFirebase = async (
             imageUrl,
             defaultEvaluation,
             timestamp: Date.now().toString(),
-          }); // Using merge to keeps existing images
-          // console.log(
-          //   ">>>> 100. ImageUrl entry added successfully to customer's db! docId: ",
-          //   docId
-          // );
-          // console.log(">>>> 100. ImageUrl entry added successfully to customer's db!");
+          });
         } catch (error) {
-          // console.error(">>>> 101. Error adding ImageUrl entry:", error);
           console.error("Error: ", error);
         }
 
