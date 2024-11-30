@@ -5,7 +5,6 @@
 
 ## Installations     
 - `npm install -g firebase-tools` firebase tools for CLI. // Required only for the first time.    
-- 
 
 ## How start the server on local machine   
 - 1. `cd agrilens-backend/functions`      
@@ -25,7 +24,6 @@
   - multer     
   
 ## Setting Up and Deploying Firebase Functions with Environment Variables  
-npm install -g firebase-tools          
 firebase init functions          
 
 npm run server   // Localhost serve     
