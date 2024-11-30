@@ -1,7 +1,5 @@
 /* eslint-disable */
 const functions = require("firebase-functions");
-// const admin = require("firebase-admin");
-const { admin, db, bucket } = require("./config/firebase-config");
 const express = require("express");
 const cors = require("cors");
 const busboy = require("busboy");
@@ -22,8 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const middleware = require("./middleware");
 const userRouter = require("./routes/users");
-const imageRouter = require("./routes/images");
-const usersApi = require("./routes/api/db");
+const adminApi = require("./routes/api/db");
 
 app.use(middleware.decodeToken);
 
@@ -32,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/analyze", (req, res) => {
-  console.log("analyze called");
+  // console.log("analyze called");
   if (req.method !== "POST") {
     // Since the endpoint is `app.post`, this block will never be excuted
     return res.status(405).end();
@@ -168,8 +165,8 @@ app.post("/analyze", (req, res) => {
         } else {
           results.push({ qwen: qwenResult.value });
           isImageValid = true;
+          // console.log(">>> qwenResult added.: ", qwenResult.value.plant_id);
         }
-        console.log(">>> qwenResult added.: ", qwenResult.value.plant_id);
       } else {
         console.log(
           ">>> Qwen analysis failed: Request failed with status code 401"
@@ -191,8 +188,8 @@ app.post("/analyze", (req, res) => {
         } else {
           results.push({ llama: llamaResult.value });
           isImageValid = true;
+          console.log(">>> llamaResult added.");
         }
-        console.log(">>> llamaResult added.");
       } else {
         console.log(
           ">>> LLama analysis failed: Request failed with status code 401"
@@ -278,10 +275,10 @@ app.post("/chat/follow-up", async (req, res) => {
     initialAnalysis
   );
 
-  console.log(">>>> 11. model: ", model);
-  console.log(">>>> 22. messages: ", message);
-  console.log(">>>> 33. initialAnalysis: ", initialAnalysis);
-  console.log(">>>> 44. conversationId: ", conversationId);
+  // console.log(">>>> 11. model: ", model);
+  // console.log(">>>> 22. messages: ", message);
+  // console.log(">>>> 33. initialAnalysis: ", initialAnalysis);
+  // console.log(">>>> 44. conversationId: ", conversationId);
 
   // Construct the conversation history
   const basePrompt = `Previous plant analysis: ${JSON.stringify(
@@ -350,19 +347,10 @@ As a plant health assistant, provide a detailed response to the follow-up questi
 });
 
 app.use("/users", userRouter);
-app.use("/images", imageRouter);
-app.use("/api/users", usersApi);
+app.use("/api/admin", adminApi);
 
 app.get("/*", (req, res) => {
   res.status(200).send({ data: "Endpoint is not valid" });
 });
 
 exports.app = functions.https.onRequest(app);
-
-// const { onRequest } = require("firebase-functions/v2/https");
-// const logger = require("firebase-functions/logger");
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
